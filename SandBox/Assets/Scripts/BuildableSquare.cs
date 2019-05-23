@@ -1,23 +1,45 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
+using UnityEngine.Tilemaps;
 
 public class BuildableSquare : MonoBehaviour
 {
-    // Start is called before the first frame update
+
+    
+    // 0 = basic turret
+    [SerializeField]
+    private GameObject[] turrets;
+    public Renderer rend;
+
     void Start()
     {
-        
+        rend = GetComponent<Renderer>();
+        rend.enabled = false;
     }
 
-    // Update is called once per frame
-    void Update()
+    // The mesh shows a green highlight when the mouse enters
+    void OnMouseEnter()
+    {
+        rend.enabled = true;
+    }
+
+    // maybe use this to add an effect while the mouse hovers over it.
+    void OnMouseOver()
+    {
+    }
+
+    // the mesh loses the highlight when the mouse moves away.
+    void OnMouseExit()
+    {
+        rend.enabled = false;
+    }
+
+    //if clicked
+    //add sprite on top of current sprite, set script to that building's script? 
+    private void OnMouseUp()
     {
         
     }
-
-    //if selected
-    //display green square
-    //if placement button pressed
-    //add sprite on top of current sprite, set script to that building's script? 
 }
