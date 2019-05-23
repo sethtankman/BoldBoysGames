@@ -40,6 +40,8 @@ public class BuildableSquare : MonoBehaviour
     //add sprite on top of current sprite, set script to that building's script? 
     private void OnMouseUp()
     {
-        
+        MainGuy player = (MainGuy)FindObjectOfType(typeof(MainGuy));
+        player.trackMode = true;
+        player.trackLocation = transform.position;
     }
 }
