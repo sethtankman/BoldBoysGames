@@ -5,27 +5,55 @@ using UnityEngine;
 public class MainGuy : MonoBehaviour
 {
     [SerializeField]
-    private GameObject _turretOne;
-
+    private GameObject _selectedTurret;
+    [SerializeField]
+    private GameObject[] _allTurrets;
     [SerializeField]
     private float speed = 2.0f;
     public bool trackMode = false;
     public Vector3 trackLocation;
+    [SerializeField]
+    private UIManager _uiManager;
 
     // Start is called before the first frame update
     void Start()
     {
         transform.position = new Vector3(0, 0, 0);
+        _uiManager = GameObject.Find("UIManager").GetComponent<UIManager>();
     }
 
     // Update is called once per frame
     void Update()
     {
         Movement();
+        SpriteSet();
+        
+    }
 
-        if(Input.GetKeyDown(KeyCode.Alpha1))
+    /// <summary>
+    /// Communicates to the UIManager and sets the selected turret to the UI.
+    /// </summary>
+    private void SpriteSet()
+    {
+        if (Input.GetKeyDown(KeyCode.Alpha1))
         {
-            PlaceTurret1();
+            _uiManager.SetSprite(0);
+            _selectedTurret = _allTurrets[0];
+        }
+        else if (Input.GetKeyDown(KeyCode.Alpha2))
+        {
+            _uiManager.SetSprite(1);
+            _selectedTurret = _allTurrets[1];
+        }
+        else if (Input.GetKeyDown(KeyCode.Alpha3))
+        {
+            _uiManager.SetSprite(2);
+            _selectedTurret = _allTurrets[2];
+        }
+        else if (Input.GetKeyDown(KeyCode.Alpha4))
+        {
+            _uiManager.SetSprite(3);
+            _selectedTurret = _allTurrets[3];
         }
     }
 
@@ -66,11 +94,6 @@ public class MainGuy : MonoBehaviour
         }
     }
 
-    private void PlaceTurret1()
-    {
-        Instantiate(_turretOne, transform.position + new Vector3(-0.63f, 0, 0), Quaternion.identity);
-    }
-
     public void MoveToTurret(Vector3 turretLocation) 
     {
         float distance = Mathf.Sqrt(Mathf.Pow((turretLocation.x - transform.position.x), 2) 
@@ -80,9 +103,14 @@ public class MainGuy : MonoBehaviour
         if (distance >1.0f )
         {
             
-            transform.Translate(unitvector * Time.deltaTime);
+            transform.Translate(unitvector * speed * Time.deltaTime);
             distance = distance - Time.deltaTime;
             Debug.Log("Distance is: " + distance);
+        }
+        else
+        {
+            trackMode = false;
+            Instantiate(_selectedTurret, turretLocation, Quaternion.identity);
         }
     }
 }
