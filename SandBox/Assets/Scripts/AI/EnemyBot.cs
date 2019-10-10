@@ -57,6 +57,8 @@ public class EnemyBot : MonoBehaviour
     /// The value of this bot dead in gold.
     /// </summary>
     [SerializeField] private int goldValue;
+
+    [SerializeField] private RawImage indicator;
     private Vector3 change;
     private Animator _animator;
 
@@ -83,6 +85,9 @@ public class EnemyBot : MonoBehaviour
         waypointIndex = 0;
         transform.position = _waypoints[0].transform.position;
         maxHealth = health;
+        RawImage indic = Instantiate(indicator);
+        indic.transform.SetParent(GameObject.Find("MiniMap").transform, false);
+        indic.gameObject.GetComponent<MinimapIcon>().symbolizedObject = this.gameObject;
     }
 
     // Update is called once per frame
@@ -143,6 +148,8 @@ public class EnemyBot : MonoBehaviour
         {
             Player.GetComponent<MainGuy>().Transaction(goldValue);
             Destroy(this.gameObject);
+            Debug.Log(indicator.name);
+            Destroy(GameObject.Find(indicator.name + "(Clone)"));
             if(--numEnemies == 0)
             {
                 UIManager.GetComponent<UIManager>().EnableStartButton();

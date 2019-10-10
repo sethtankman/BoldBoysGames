@@ -124,6 +124,9 @@ MonoBehaviour:
   health: 60
   damage: 1
   goldValue: 10
+  indicator: {fileID: 4094969051332992580, guid: 0cf0e85d2f843104bac1c52a77b35bb9,
+    type: 3}
+  minimap: {fileID: 351778426220877931, guid: c232ef4c00026fa46b44b0ccc1a58a2c, type: 3}
 --- !u!50 &5688856242534927360
 Rigidbody2D:
   serializedVersion: 4
