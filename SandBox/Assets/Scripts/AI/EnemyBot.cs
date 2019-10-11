@@ -85,7 +85,7 @@ public class EnemyBot : MonoBehaviour
         waypointIndex = 0;
         transform.position = _waypoints[0].transform.position;
         maxHealth = health;
-        RawImage indic = Instantiate(indicator);
+        RawImage indic = Instantiate(indicator, transform.position, Quaternion.identity);
         indic.transform.SetParent(GameObject.Find("MiniMap").transform, false);
         indic.gameObject.GetComponent<MinimapIcon>().symbolizedObject = this.gameObject;
     }

@@ -11,6 +11,7 @@ public class MinimapIcon : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+
         spacing = 11;
         UpdatePosition();
     }
@@ -32,10 +33,10 @@ public class MinimapIcon : MonoBehaviour
         if (symbolizedObject != null)
         {
             position = symbolizedObject.transform.position;
-            position.x += 26.7f;
-            position.y += 11.7f;
-            position.x = 4.72f * position.x;
-            position.y = 5.2f * position.y;
+            position.x += 26.5f;
+            position.y += 12;
+            position.x = 5.7f * position.x;
+            position.y = 6.2f * position.y;
             transform.position = position;
         } else
         {
