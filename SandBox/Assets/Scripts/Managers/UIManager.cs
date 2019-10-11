@@ -9,7 +9,7 @@ public class UIManager : MonoBehaviour
     /// <summary>
     /// The list of all turrets in the game.
     /// </summary>
-    [SerializeField] private GameObject[] allTurrets = new GameObject[4];
+    [SerializeField] private GameObject[] allTurrets = new GameObject[2];
 
     /// <summary>
     /// The image of the turret ready to place on the UI.
@@ -53,9 +53,8 @@ public class UIManager : MonoBehaviour
     private Text costText;
 
     public static bool gamePaused;
-    public GameObject pauseMenuUI;
-    public GameObject InGameUI;
-    private GameObject BuildableSquares;
+    public GameObject pauseMenuUI, InGameUI, InstructionsUI, LosingScreen;
+    private GameObject BuildableSquares, CameraManager;
     private MainGuy Player;
     private Button[] InventoryButtons;
 
@@ -63,12 +62,14 @@ public class UIManager : MonoBehaviour
     void Start()
     {
         BuildableSquares = GameObject.Find("BuildableSquares");
+        CameraManager = GameObject.Find("MainCamera");
         gBText = GameObject.Find("GigaBytes").GetComponent<Text>();
         livesText = GameObject.Find("LivesText").GetComponent<Text>();
         costText = GameObject.Find("CostText").GetComponent<Text>();
         Player = GameObject.Find("MainGuy").GetComponent<MainGuy>();
         InventoryButtons = new Button[16];
         _audioSource = GetComponent<AudioSource>();
+        gamePaused = false;
     }
 
 
@@ -85,6 +86,10 @@ public class UIManager : MonoBehaviour
             {
                 Pause();
             }
+        }
+        if (Input.GetKeyDown(KeyCode.Return))
+        {
+            InstructionsUI.SetActive(false);
         }
     }
 
@@ -125,6 +130,11 @@ public class UIManager : MonoBehaviour
         _audioSource.PlayOneShot(audioClips[3]);
         lives -= livesLost;
         livesText.text = lives.ToString();
+        if(lives <= 0)
+        {
+            CameraManager.GetComponent<CameraManager>().PlayTrack(3);
+            LosingScreen.SetActive(true);
+        }
     }
 
     public void DisableStartButton()

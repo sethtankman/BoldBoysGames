@@ -48,6 +48,7 @@ public class MainGuy : MonoBehaviour
         if (trackMode)
         {
             MoveToTurret(trackLocation);
+            _animator.SetBool("moving", true);
         } else if (change != Vector3.zero)
         {
             Movement();
@@ -66,8 +67,12 @@ public class MainGuy : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Alpha1))
         {
-            _uiManager.SetSprite(0);
-            _selectedTurret = _allTurrets[0];
+            if (GameObject.Find("Turret1Button"))
+            {
+                _uiManager.SetTurret(0);
+                _uiManager.EnableStartButton();
+                _uiManager.UISound(1);
+            }
         }
         else if (Input.GetKeyDown(KeyCode.Alpha2))
         {
@@ -111,6 +116,8 @@ public class MainGuy : MonoBehaviour
         if (distance > 1.0f)
         {
 
+            _animator.SetFloat("moveX", unitvector.x);
+            _animator.SetFloat("moveY", unitvector.y);
             transform.Translate(unitvector * speed * Time.deltaTime);
             distance = distance - Time.deltaTime;
         }
