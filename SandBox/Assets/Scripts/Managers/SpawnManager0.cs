@@ -104,4 +104,9 @@ public class SpawnManager0 : MonoBehaviour
             SceneManager.LoadScene(2);
         }
     }
+
+    public void ResetGame()
+    {
+        SceneManager.LoadScene(0);
+    }
 }
