@@ -8,7 +8,7 @@ using UnityEngine;
 public class CameraManager : MonoBehaviour
 {
 
-    [SerializeField] private float xMax, yMax, xMin, yMin;
+    [SerializeField] public float xMax, yMax, xMin, yMin;
     [SerializeField] private AudioClip[] _Tracks;
     [SerializeField] GameData _GameData;
 
