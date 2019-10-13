@@ -34,16 +34,16 @@ public class MinimapIcon : MonoBehaviour
         {
             float mapSizeX = transform.parent.GetComponent<RectTransform>().rect.width;
             float mapSizeY = transform.parent.GetComponent<RectTransform>().rect.height;
-            float MainGuyPositionX = symbolizedObject.transform.position.x - (1.42f * mainCamera.GetComponent<CameraManager>().xMin); //35.5f;
-            float MainGuyPositionY = symbolizedObject.transform.position.y - (1.54f * mainCamera.GetComponent<CameraManager>().yMin); //17.5f;
+            float MainGuyPositionX = symbolizedObject.transform.position.x - (1.42f * mainCamera.GetComponent<CameraManager>().xMin);// - 1.6f tutorial //- (1.42f * mainCamera.GetComponent<CameraManager>().xMin); //35.5f lv1;
+            float MainGuyPositionY = symbolizedObject.transform.position.y - (1.54f * mainCamera.GetComponent<CameraManager>().yMin);// - 1.8f tutorial //- (1.54f * mainCamera.GetComponent<CameraManager>().yMin); //17.5f lv1;
             float CameraRangeX = mainCamera.GetComponent<CameraManager>().xMax - mainCamera.GetComponent<CameraManager>().xMin;
             float CameraRangeY = mainCamera.GetComponent<CameraManager>().yMax - mainCamera.GetComponent<CameraManager>().yMin;
             position.x = mapSizeX 
                 * MainGuyPositionX 
-                / (CameraRangeX);
+                / (CameraRangeX); // + 0 lv1, tutorial same
             position.y = mapSizeY
                 * MainGuyPositionY
-                / (CameraRangeY -3);
+                / (CameraRangeY -3); // -3 lv1, +1 tutorial
             //float horizConstant = mainCamera.GetComponent<CameraManager>().x
             //need to find some value that changes when the screen is resized.
             //position.x += 26.5f;
