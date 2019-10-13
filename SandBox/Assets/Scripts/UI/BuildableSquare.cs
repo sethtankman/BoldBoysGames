@@ -57,7 +57,7 @@ public class BuildableSquare : MonoBehaviour
             _player.trackMode = true;
             _player.trackLocation = transform.position;
             rend.sprite = RangeIndicator;
-            rend.size = new Vector2(RangeIndicatorSize, RangeIndicatorSize);
+            transform.localScale = new Vector3(RangeIndicatorSize, RangeIndicatorSize, 1);
         }
     }
 }
