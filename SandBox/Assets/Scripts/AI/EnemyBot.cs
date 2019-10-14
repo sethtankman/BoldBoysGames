@@ -157,4 +157,11 @@ public class EnemyBot : MonoBehaviour
         }
     }
     
+    public IEnumerator Stun(float seconds)
+    {
+        float prevSpeed = speed;
+        speed = 0;
+        yield return new WaitForSeconds(seconds);
+        speed = prevSpeed;
+    }
 }

@@ -19,13 +19,19 @@ public class EMPTurret : Turret
         if (firing)
         {
             AudioSource.PlayClipAtPoint(ShotSound, transform.position);
+            foreach(GameObject bot in queue)
+            {
+                bot.GetComponent<EnemyBot>().Stun(3);
+            }
         }
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
+        Debug.Log("EMPTriggered");
         if (collision.transform.tag == "Enemy" && firing == false)
         {
+            queue.Add(collision.gameObject);
             firing = true;
             _animator.SetBool("Firing", true);
         }
