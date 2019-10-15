@@ -6,6 +6,7 @@ public class EMPTurret : Turret
 {
     private List<GameObject> queue;
     [SerializeField] private Animator _animator;
+    private int cooldown = 0;
 
     // Start is called before the first frame update
     void Start()
@@ -14,30 +15,38 @@ public class EMPTurret : Turret
         firing = false;
     }
 
+    private void Update()
+    {
+        if (cooldown > 0)
+        {
+            cooldown--;
+        }
+    }
+
     public override void FireShot()
     {
-        if (firing)
+        if (firing && cooldown < 1)
         {
             AudioSource.PlayClipAtPoint(ShotSound, transform.position);
-            foreach(GameObject bot in queue)
+            foreach (GameObject bot in queue)
             {
-                bot.GetComponent<EnemyBot>().Stun(3);
+                EnemyBot enemy = bot.GetComponent<EnemyBot>();
+                enemy.Stun(3);
+                cooldown = 300;
             }
         }
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        Debug.Log("EMPTriggered");
-        if (collision.transform.tag == "Enemy" && firing == false)
+        if (collision.transform.tag == "Enemy")
         {
             queue.Add(collision.gameObject);
-            firing = true;
-            _animator.SetBool("Firing", true);
-        }
-        else if (collision.transform.tag == "Enemy" && firing == true)
-        {
-            queue.Add(collision.gameObject);
+            if (cooldown < 1 && firing == false)
+            {
+                firing = true;
+                _animator.SetBool("Firing", true);
+            }
         }
     }
 

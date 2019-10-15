@@ -13,7 +13,7 @@ public class SpawnManager0 : MonoBehaviour
     /// <summary>
     /// The list of all enemies in the game
     /// </summary>
-    [SerializeField] private GameObject[] enemyList;
+    [SerializeField] private GameObject[] enemyList, path;
 
     /// <summary>
     /// the current wave number
@@ -52,10 +52,13 @@ public class SpawnManager0 : MonoBehaviour
                 "  Nobody ever thought they could go rogue.  Health: 60.  Speed: 2.  GigaBytes: 10.  Damage: 1");
             _CameraManager.PlayTrack(1);
             GameObject bot = Instantiate(enemyList[0], Vector3.zero, Quaternion.identity);
+            bot.GetComponent<EnemyBot>().SetPath(path);
             yield return new WaitForSeconds(1.5f);
             bot = Instantiate(enemyList[0], Vector3.zero, Quaternion.identity);
+            bot.GetComponent<EnemyBot>().SetPath(path);
             yield return new WaitForSeconds(1);
             bot = Instantiate(enemyList[0], Vector3.zero, Quaternion.identity);
+            bot.GetComponent<EnemyBot>().SetPath(path);
         }
         else if (wave == 2)
         {
@@ -64,37 +67,52 @@ public class SpawnManager0 : MonoBehaviour
                 "  Health: 140.  Speed: 1.5.  GigaBytes: 25.  Damage: 3");
             _CameraManager.PlayTrack(1);
             GameObject bot = Instantiate(enemyList[0], Vector3.zero, Quaternion.identity);
+            bot.GetComponent<EnemyBot>().SetPath(path);
             yield return new WaitForSeconds(1.5f);
             bot = Instantiate(enemyList[1], Vector3.zero, Quaternion.identity);
+            bot.GetComponent<EnemyBot>().SetPath(path);
             yield return new WaitForSeconds(2);
             bot = Instantiate(enemyList[0], Vector3.zero, Quaternion.identity);
+            bot.GetComponent<EnemyBot>().SetPath(path);
             yield return new WaitForSeconds(1);
             bot = Instantiate(enemyList[0], Vector3.zero, Quaternion.identity);
+            bot.GetComponent<EnemyBot>().SetPath(path);
             yield return new WaitForSeconds(1);
             bot = Instantiate(enemyList[0], Vector3.zero, Quaternion.identity);
+            bot.GetComponent<EnemyBot>().SetPath(path);
         }
         else if (wave == 3)
         {
             _CameraManager.PlayTrack(2);
             GameObject bot = Instantiate(enemyList[0], Vector3.zero, Quaternion.identity);
+            bot.GetComponent<EnemyBot>().SetPath(path);
             yield return new WaitForSeconds(0.5f);
             bot = Instantiate(enemyList[0], Vector3.zero, Quaternion.identity);
+            bot.GetComponent<EnemyBot>().SetPath(path);
             yield return new WaitForSeconds(0.5f);
             bot = Instantiate(enemyList[0], Vector3.zero, Quaternion.identity);
+            bot.GetComponent<EnemyBot>().SetPath(path);
             yield return new WaitForSeconds(0.5f);
             bot = Instantiate(enemyList[0], Vector3.zero, Quaternion.identity);
+            bot.GetComponent<EnemyBot>().SetPath(path);
             yield return new WaitForSeconds(0.5f);
             bot = Instantiate(enemyList[1], Vector3.zero, Quaternion.identity);
+            bot.GetComponent<EnemyBot>().SetPath(path);
             yield return new WaitForSeconds(0.5f);
             bot = Instantiate(enemyList[1], Vector3.zero, Quaternion.identity);
+            bot.GetComponent<EnemyBot>().SetPath(path);
             yield return new WaitForSeconds(0.5f);
             bot = Instantiate(enemyList[1], Vector3.zero, Quaternion.identity);
+            bot.GetComponent<EnemyBot>().SetPath(path);
             yield return new WaitForSeconds(0.5f);
             bot = Instantiate(enemyList[0], Vector3.zero, Quaternion.identity);
+            bot.GetComponent<EnemyBot>().SetPath(path);
             yield return new WaitForSeconds(0.5f);
             bot = Instantiate(enemyList[0], Vector3.zero, Quaternion.identity);
+            bot.GetComponent<EnemyBot>().SetPath(path);
             yield return new WaitForSeconds(0.5f);
             bot = Instantiate(enemyList[0], Vector3.zero, Quaternion.identity);
+            bot.GetComponent<EnemyBot>().SetPath(path);
         }
         else
         {

@@ -157,14 +157,7 @@ public class UIManager : MonoBehaviour
         GameObject turret = allTurrets[index];
         Player._selectedTurret = turret;
         selectedTurretImage.sprite = turret.GetComponent<SpriteRenderer>().sprite;
-        int cost = 0;
-        if(index == 0)
-        {
-            cost = 30;
-        } else if(index ==1)
-        {
-            
-        }
+        int cost = turret.GetComponent<Turret>().getPrice();
         costText.text = "Cost: " + cost;
     }
 
