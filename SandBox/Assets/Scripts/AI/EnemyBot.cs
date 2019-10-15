@@ -66,24 +66,9 @@ public class EnemyBot : MonoBehaviour
     void Start()
     {
         numEnemies++;
-        int place = 0;
         UIManager = GameObject.Find("UIManager");
-        GameObject signal = GameObject.Find("TurnSignal");
-        while (true)
-        {
-            if (signal == null)
-            {
-                break;
-            }
-            _waypoints[place] = signal;
-            place++;
-            signal = GameObject.Find("TurnSignal (" + place + ")");
-        }
-
         Player = GameObject.FindGameObjectWithTag("Player");
         _animator = GetComponent<Animator>();
-        waypointIndex = 0;
-        transform.position = _waypoints[0].transform.position;
         maxHealth = health;
         RawImage indic = Instantiate(indicator, transform.position, Quaternion.identity);
         indic.transform.SetParent(GameObject.Find("MiniMap").transform, false);
@@ -98,6 +83,7 @@ public class EnemyBot : MonoBehaviour
             var move = Vector3.MoveTowards(transform.position, _waypoints[waypointIndex].transform.position,
                 speed * Time.deltaTime);
             change = transform.position - move;
+
             //animate depending on direction
             if (_animator != null)
             {
@@ -156,9 +142,15 @@ public class EnemyBot : MonoBehaviour
             }
         }
     }
-    
-    public IEnumerator Stun(float seconds)
+
+    public void Stun(float seconds)
     {
+        StartCoroutine(StunCoroutine(seconds));
+    }
+
+    public IEnumerator StunCoroutine(float seconds)
+    {
+        Debug.Log("Stun Called");
         float prevSpeed = speed;
         speed = 0;
         yield return new WaitForSeconds(seconds);

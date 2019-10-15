@@ -8,7 +8,7 @@ using UnityEngine;
 public class Projectile : MonoBehaviour
 {
     private GameObject target;
-    [SerializeField] private float speed;
+    [SerializeField] private float speed, damage;
 
     // Start is called before the first frame update
     void Start()
@@ -27,7 +27,7 @@ public class Projectile : MonoBehaviour
             //if it hits, destroy this game object and do damage
             if (transform.position == target.transform.position)
             {
-                target.GetComponent<EnemyBot>().TakeDamage(10);
+                target.GetComponent<EnemyBot>().TakeDamage(damage);
                 Destroy(this.gameObject);
             }
         } else if(target == null)

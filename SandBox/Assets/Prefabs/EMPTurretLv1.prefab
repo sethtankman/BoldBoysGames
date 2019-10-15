@@ -113,10 +113,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fafea69fb3d16d146aede77755cd4be5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  laser: {fileID: 0}
-  _animator: {fileID: 3397780332139634107}
   id: 1
-  ShotSound: {fileID: 8300000, guid: 74fcae481467c404697202c3dad210a8, type: 3}
+  ShotSound: {fileID: 8300000, guid: 2eb1c3d672cbeec45bb20869e0914179, type: 3}
   firing: 0
   _animator: {fileID: 3397780332139634107}
 --- !u!58 &9137566228417375270

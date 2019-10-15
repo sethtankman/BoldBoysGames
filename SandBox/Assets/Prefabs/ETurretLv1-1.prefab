@@ -95,10 +95,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 70eeb11e06dd5bf4bab4d63655da7037, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  id: 0
+  ShotSound: {fileID: 8300000, guid: ef60541ebbb9d084289ab5fb98d05231, type: 3}
+  firing: 0
   laser: {fileID: 4352683985255663377, guid: 830c54813a5531a47839276a77a03b59, type: 3}
   _animator: {fileID: 8256287774715047536}
-  ShotSound: {fileID: 8300000, guid: ef60541ebbb9d084289ab5fb98d05231, type: 3}
-  id: 0
 --- !u!58 &4796139284920533635
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -114,7 +115,7 @@ CircleCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: 2
+  m_Radius: 2.5
 --- !u!95 &8256287774715047536
 Animator:
   serializedVersion: 3
