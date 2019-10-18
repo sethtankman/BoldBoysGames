@@ -134,7 +134,7 @@ public class EnemyBot : MonoBehaviour
         {
             Player.GetComponent<MainGuy>().Transaction(goldValue);
             Destroy(this.gameObject);
-            Debug.Log(indicator.name);
+            //Debug.Log(indicator.name);
             Destroy(GameObject.Find(indicator.name + "(Clone)"));
             if(--numEnemies == 0)
             {

@@ -36,16 +36,11 @@ public class CameraManager : MonoBehaviour
             transform.position = new Vector3(Mathf.Clamp(target.position.x, xMin, xMax), 
                 Mathf.Clamp(target.position.y, yMin, yMax), -10);
         }
-        else
-        {
-           
-
-        }
     }
 
     public void PlayTrack(int intensity)
     {
-        int lvl = _GameData.level;
+        int lvl = GameData.level;
         if(intensity == 0)
         {
             if(lvl == 0)
