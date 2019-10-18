@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Assets.Scripts;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
@@ -8,20 +9,43 @@ using UnityEngine.UI;
 
 public class GameData : MonoBehaviour
 {
-    public int level;
-    public Dictionary<int, Item> items = new Dictionary<int, Item>();
-    public Dictionary<int, Tuple<Sprite, string>> archives = new Dictionary<int, Tuple<Sprite, string>>();
+    private UIManager _uIManager;
+    public static int level;
+    public static Dictionary<int, Item> items = new Dictionary<int, Item>();
+    public static Dictionary<int, Tuple<Sprite, string>> archives = new Dictionary<int, Tuple<Sprite, string>>();
     
     public void AddItem(Item item)
     {
-        if(items == null)
+        item.StartingFunction();
+        items.Add(LowestEmptySlot(false), item);
+    }
+
+    public void LoadItems()
+    {
+        if (items == null)
         {
             items = new Dictionary<int, Item>();
         }
-        items.Add(LowestEmptySlot(false), item);
-        item.StartingFunction();
+        for (int i = 0; i < items.Count; i++)
+        {
+            if (items.ContainsKey(i) && items[i] is BluePrint)
+            {
+                BluePrint bp = (BluePrint)items[i];
+                _uIManager.EnableTurretButton(bp.getID());
+            }
+        }
     }
-    
+
+    public void OnLevelWasLoaded(int level)
+    {
+        _uIManager = GameObject.Find("UIManager").GetComponent<UIManager>();
+        if(_uIManager == null)
+        {
+            Debug.Log("UIManager not found");
+        }
+        LoadItems();
+    }
+
     public void AddToArchive(Sprite _sprite, string _string)
     {
         if(archives == null)
@@ -97,19 +121,4 @@ public class GameData : MonoBehaviour
         }
     }
 
-    /// <summary>
-    /// Needs to actually be implemented.
-    /// </summary>
-    /// <param name="path"></param>
-    public void SaveGame(string path)
-    {
-        StringBuilder saveString = new StringBuilder();
-        saveString.Append("level: " + level);
-        
-        Debug.Log(saveString.ToString());
-        StreamWriter sw = File.CreateText(path);
-        sw.Close();
-
-        File.WriteAllText(path, saveString.ToString());
-    }
 }

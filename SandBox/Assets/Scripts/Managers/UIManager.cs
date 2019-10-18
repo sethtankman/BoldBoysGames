@@ -57,6 +57,7 @@ public class UIManager : MonoBehaviour
     private GameObject BuildableSquares, CameraManager;
     private MainGuy Player;
     private Button[] InventoryButtons;
+    public GameObject[] TurretButtons;
 
     // Start is called before the first frame update
     void Start()
@@ -67,7 +68,12 @@ public class UIManager : MonoBehaviour
         livesText = GameObject.Find("LivesText").GetComponent<Text>();
         costText = GameObject.Find("CostText").GetComponent<Text>();
         Player = GameObject.Find("MainGuy").GetComponent<MainGuy>();
+        gBText.text = "" + Player.gBytes;
         InventoryButtons = new Button[16];
+        foreach(GameObject button in TurretButtons)
+        {
+            button.SetActive(false);
+        }
         _audioSource = GetComponent<AudioSource>();
         gamePaused = false;
     }
@@ -145,6 +151,11 @@ public class UIManager : MonoBehaviour
     public void EnableStartButton()
     {
         startWaveButton.SetActive(true);
+    }
+
+    public void EnableTurretButton(int buttonNum)
+    {
+        TurretButtons[buttonNum].SetActive(true);
     }
 
     public void modifyGBytes(string newDisplay)

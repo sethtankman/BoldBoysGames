@@ -12,8 +12,10 @@ namespace Assets.Scripts
     {
         [SerializeField] private int BluePrintID;
         [SerializeField] private GameObject turretButton;
+        public string TBName;
         public override void StartingFunction()
         {
+            TBName = turretButton.name;
             AudioSource.PlayClipAtPoint(collectSound, Camera.main.transform.position);
             if (turretButton != null)
             {
@@ -27,5 +29,10 @@ namespace Assets.Scripts
         {
             BluePrintID = ID;
         } 
+
+        public int getID()
+        {
+            return BluePrintID;
+        }
     }
 }

@@ -129,9 +129,7 @@ public class SpawnManager1 : MonoBehaviour
         }
         else
         {
-            Debug.Log("Entered Save");
-            _GameData.level++;
-            //_GameData.SaveGame("C:\Users\addys");
+            GameData.level++;
             SceneManager.LoadScene(2);
         }
     }
