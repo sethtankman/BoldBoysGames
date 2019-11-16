@@ -12,8 +12,7 @@ public class LaserTurret : Turret
 
     private GameObject activeTarget;
     private List<GameObject> queue;
-
-    //private int cooldown = 0;
+    
     // Start is called before the first frame update
     void Start()
     {
@@ -34,10 +33,6 @@ public class LaserTurret : Turret
                 transform.position.y + 0.17f, 0), Quaternion.identity).gameObject.GetComponent<Projectile>();
             shot.SetTarget(activeTarget);
         }
-        //else if(cooldown > 0)
-        //{
-        //    cooldown--;
-        //}
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
