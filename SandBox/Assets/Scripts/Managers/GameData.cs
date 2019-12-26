@@ -11,6 +11,8 @@ public class GameData : MonoBehaviour
 {
     private UIManager _uIManager;
     public static int level;
+    public static int turretsFound;
+    [SerializeField] private GameObject[] turretButtons = new GameObject[2];
     public static Dictionary<int, Item> items = new Dictionary<int, Item>();
     public static Dictionary<int, Tuple<Sprite, string>> archives = new Dictionary<int, Tuple<Sprite, string>>();
     
@@ -20,7 +22,12 @@ public class GameData : MonoBehaviour
         items.Add(LowestEmptySlot(false), item);
     }
 
-    public void LoadItems()
+    public void incrementTurretCount()
+    {
+        turretsFound++;
+    }
+
+    public void LoadItemsAndTurrets()
     {
         if (items == null)
         {
@@ -31,8 +38,12 @@ public class GameData : MonoBehaviour
             if (items.ContainsKey(i) && items[i] is BluePrint)
             {
                 BluePrint bp = (BluePrint)items[i];
-                _uIManager.EnableTurretButton(bp.getID());
             }
+        }
+        Debug.Log(turretsFound);
+        for(int j =0; j < turretsFound; j++)
+        {
+            turretButtons[j].SetActive(true);
         }
     }
 
@@ -43,7 +54,8 @@ public class GameData : MonoBehaviour
         {
             Debug.Log("UIManager not found");
         }
-        LoadItems();
+        LoadItemsAndTurrets();
+
     }
 
     public void AddToArchive(Sprite _sprite, string _string)

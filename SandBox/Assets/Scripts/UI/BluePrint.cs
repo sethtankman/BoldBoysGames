@@ -11,7 +11,7 @@ namespace Assets.Scripts
     public class BluePrint : Item
     {
         [SerializeField] private int BluePrintID;
-        [SerializeField] private GameObject turretButton;
+        [SerializeField] private GameObject turretButton, data;
         public string TBName;
         public override void StartingFunction()
         {
@@ -20,6 +20,7 @@ namespace Assets.Scripts
             if (turretButton != null)
             {
                 turretButton.SetActive(true);
+                data.GetComponent<GameData>().incrementTurretCount();
             } else {
                 Debug.Log("Turret Button not found.");
             }

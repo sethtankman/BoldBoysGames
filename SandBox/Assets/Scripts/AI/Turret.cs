@@ -10,11 +10,14 @@ public abstract class Turret : MonoBehaviour
     //public Sprite ArchiveSprite;
     //public string InventoryDescription, ArchiveDescription;
     //public abstract void StartingFunction();
-    public int id;
+    protected int id;
     public AudioClip ShotSound;
     public bool firing;
 
     // Update is called once per frame
     public abstract void FireShot();
     public abstract int getPrice();
+    public abstract void setLevel(int lvl);
+    public abstract int getUpgradePrice(int _lvl);
+    public abstract int getSellPrice();
 }

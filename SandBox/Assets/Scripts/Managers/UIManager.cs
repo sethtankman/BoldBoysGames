@@ -70,10 +70,10 @@ public class UIManager : MonoBehaviour
         Player = GameObject.Find("MainGuy").GetComponent<MainGuy>();
         gBText.text = "" + Player.gBytes;
         InventoryButtons = new Button[16];
-        foreach(GameObject button in TurretButtons)
-        {
-            button.SetActive(false);
-        }
+        //foreach(GameObject button in TurretButtons)
+        //{
+        //    button.SetActive(false);
+        //}
         _audioSource = GetComponent<AudioSource>();
         gamePaused = false;
     }
@@ -158,9 +158,14 @@ public class UIManager : MonoBehaviour
         TurretButtons[buttonNum].SetActive(true);
     }
 
-    public void modifyGBytes(string newDisplay)
+    public void modifyGBytesText(string newDisplay)
     {
         gBText.text = newDisplay;
+    }
+
+    public void modifyCostText(string newDisplay)
+    {
+        costText.text = newDisplay;
     }
 
     public void SetTurret(int index)

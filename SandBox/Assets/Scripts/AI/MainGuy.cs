@@ -22,6 +22,7 @@ public class MainGuy : MonoBehaviour
     private bool isMoving;
     private Vector3 change;
     private Rigidbody2D myRigidBody;
+    public BuildableSquare selectedSquare;
 
     // Start is called before the first frame update
     void Start()
@@ -124,7 +125,7 @@ public class MainGuy : MonoBehaviour
         else
         {
             trackMode = false;
-            Instantiate(_selectedTurret, new Vector3(turretLocation.x, turretLocation.y, 0), Quaternion.identity);
+            this.selectedSquare.BuildTurret(_selectedTurret.GetComponent<Turret>());
         }
     }
 
@@ -135,7 +136,7 @@ public class MainGuy : MonoBehaviour
     public void Transaction(int amount)
     {
         gBytes += amount;
-        _uiManager.modifyGBytes(gBytes.ToString());
+        _uiManager.modifyGBytesText(gBytes.ToString());
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
