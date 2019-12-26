@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 8256287774715047536}
   - component: {fileID: -6101416153130456557}
   m_Layer: 0
-  m_Name: ETurretLv1-1
+  m_Name: ETurretLv1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -96,10 +96,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   id: 0
+  lvl: 0
   ShotSound: {fileID: 8300000, guid: ef60541ebbb9d084289ab5fb98d05231, type: 3}
   firing: 0
-  laser: {fileID: 4352683985255663377, guid: 830c54813a5531a47839276a77a03b59, type: 3}
+  _laser: {fileID: 4352683985255663377, guid: 830c54813a5531a47839276a77a03b59, type: 3}
   _animator: {fileID: 8256287774715047536}
+  _lasers:
+  - {fileID: 4352683985255663377, guid: 830c54813a5531a47839276a77a03b59, type: 3}
+  - {fileID: 226083852431174128, guid: 81ec66ced9a951c4c88ecddd9bbab9d8, type: 3}
 --- !u!58 &4796139284920533635
 CircleCollider2D:
   m_ObjectHideFlags: 0

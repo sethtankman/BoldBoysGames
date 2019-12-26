@@ -6,7 +6,7 @@ public class EMPTurret : Turret
 {
     private List<GameObject> queue;
     [SerializeField] private Animator _animator;
-    private int cooldown = 0;
+    private int cooldown = 0, lvl = 0;
 
     // Start is called before the first frame update
     void Start()
@@ -33,6 +33,7 @@ public class EMPTurret : Turret
                 EnemyBot enemy = bot.GetComponent<EnemyBot>();
                 enemy.Stun(3);
                 cooldown = 300;
+                _animator.SetBool("Firing", false);
             }
         }
     }
@@ -59,7 +60,6 @@ public class EMPTurret : Turret
             {
                 firing = false;
                 _animator.SetBool("Firing", false);
-                return;
             }
 
         }
@@ -73,5 +73,25 @@ public class EMPTurret : Turret
     public override int getPrice()
     {
         return 40;
+    }
+
+    public override int getUpgradePrice(int _lvl)
+    {
+        return 40;
+    }
+
+    public override void setLevel(int _lvl)
+    {
+        lvl = _lvl;
+    }
+
+    public override int getSellPrice()
+    {
+        int sellPrice = 0;
+        for (int i = 0; i < lvl; i++)
+        {
+            sellPrice += getUpgradePrice(i);
+        }
+        return (int)(sellPrice * 0.8);
     }
 }

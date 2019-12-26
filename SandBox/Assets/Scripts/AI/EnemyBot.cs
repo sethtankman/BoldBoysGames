@@ -129,7 +129,9 @@ public class EnemyBot : MonoBehaviour
         health -= damage;
         Transform hBar = this.transform.GetChild(0).transform.Find("Bar");
         float newHealth = health / maxHealth;
+        float prevScale = hBar.localScale.x;
         hBar.localScale = new Vector3(newHealth, 1f);
+        hBar.localPosition -= new Vector3((prevScale - newHealth)/2.2f, 0, 0);
         if(health <= 0)
         {
             Player.GetComponent<MainGuy>().Transaction(goldValue);
@@ -143,14 +145,12 @@ public class EnemyBot : MonoBehaviour
         }
     }
 
-    public void Stun(float seconds)
-    {
+    public void Stun(float seconds) { 
         StartCoroutine(StunCoroutine(seconds));
     }
 
     public IEnumerator StunCoroutine(float seconds)
     {
-        Debug.Log("Stun Called");
         float prevSpeed = speed;
         speed = 0;
         yield return new WaitForSeconds(seconds);

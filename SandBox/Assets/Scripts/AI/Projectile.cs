@@ -13,8 +13,6 @@ public class Projectile : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        //initialize target
-        //target = GameObject.FindGameObjectWithTag("Enemy");
     }
 
     // Update is called once per frame
@@ -40,5 +38,10 @@ public class Projectile : MonoBehaviour
     public void SetTarget(GameObject _target)
     {
         target = _target;
+    }
+
+    public void SetDamage(float _damage)
+    {
+        damage = _damage;
     }
 }

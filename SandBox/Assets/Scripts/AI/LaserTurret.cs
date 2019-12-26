@@ -7,9 +7,11 @@ using UnityEngine;
 /// </summary>
 public class LaserTurret : Turret
 {
-    [SerializeField] private GameObject laser;
+    [SerializeField] private GameObject _laser;
     [SerializeField] private Animator _animator;
+    [SerializeField] private GameObject[] _lasers;
 
+    private int lvl;
     private GameObject activeTarget;
     private List<GameObject> queue;
     
@@ -19,7 +21,6 @@ public class LaserTurret : Turret
         _animator.SetBool("Firing", false);
         firing = false;
         queue = new List<GameObject>();
-
     }
 
     // Update is called once per frame
@@ -27,9 +28,19 @@ public class LaserTurret : Turret
     {
         if(activeTarget != null)
         {
-
             AudioSource.PlayClipAtPoint(ShotSound, transform.position);
-            Projectile shot = Instantiate(laser, new Vector3(transform.position.x, 
+            if (lvl == 1)
+            {
+                _laser.GetComponent<Projectile>().SetDamage(8);
+            } else if (lvl == 2)
+            {
+                _laser.GetComponent<Projectile>().SetDamage(12);
+            } else if (lvl == 3)
+            {
+                _laser.GetComponent<Projectile>().SetDamage(20);
+            }
+            
+            Projectile shot = Instantiate(_laser, new Vector3(transform.position.x, 
                 transform.position.y + 0.17f, 0), Quaternion.identity).gameObject.GetComponent<Projectile>();
             shot.SetTarget(activeTarget);
         }
@@ -75,5 +86,36 @@ public class LaserTurret : Turret
     public override int getPrice()
     {
         return 30;
+    }
+
+    public override int getUpgradePrice(int _lvl)
+    {
+        if (_lvl == 0)
+            return 30;
+        if (_lvl == 1)
+            return 20;
+        if (_lvl == 2)
+            return 50;
+        else { return 0; }
+    }
+
+    public override void setLevel(int _lvl)
+    {
+        if (_lvl == 3)
+        {
+            _laser = _lasers[1];
+            _animator.SetInteger("Level", _lvl);
+        }
+        lvl = _lvl;
+    }
+
+    public override int getSellPrice()
+    {
+        int sellPrice = 0;
+        for(int i = 0; i < lvl; i++)
+        {
+            sellPrice += getUpgradePrice(i);
+        }
+        return (int)(sellPrice * 0.8);
     }
 }
