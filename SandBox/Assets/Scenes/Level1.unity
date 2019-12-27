@@ -4657,7 +4657,7 @@ MonoBehaviour:
   pauseMenuUI: {fileID: 565968699}
   InGameUI: {fileID: 105892264}
   InstructionsUI: {fileID: 0}
-  LosingScreen: {fileID: 0}
+  LosingScreen: {fileID: 574109770}
   TurretButtons:
   - {fileID: 1103486052}
   - {fileID: 544469683}
@@ -34163,6 +34163,7 @@ MonoBehaviour:
   trackLocation: {x: 0, y: 0, z: 0}
   _uiManager: {fileID: 372094412}
   _animator: {fileID: 1349959810}
+  selectedSquare: {fileID: 0}
 --- !u!212 &1349959806
 SpriteRenderer:
   m_ObjectHideFlags: 0
