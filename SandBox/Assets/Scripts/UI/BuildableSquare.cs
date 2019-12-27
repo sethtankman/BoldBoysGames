@@ -31,10 +31,7 @@ public class BuildableSquare : MonoBehaviour
 
     private void Update()
     {
-        if(Input.GetMouseButton(1))
-        {
-            DismantleTurret();
-        }
+        
     }
 
     // The mesh shows a green highlight when the mouse enters
@@ -47,6 +44,10 @@ public class BuildableSquare : MonoBehaviour
     // maybe use this to add an effect while the mouse hovers over it.
     void OnMouseOver()
     {
+        if (Input.GetMouseButtonUp(1))
+        {
+            DismantleTurret();
+        }
     }
 
     // the mesh loses the highlight when the mouse moves away.
@@ -82,6 +83,7 @@ public class BuildableSquare : MonoBehaviour
 
     public void BuildTurret(Turret _selectedTurret)
     {
+        _audioSource.volume = 0.3f;
         _audioSource.PlayOneShot(audioClips[0]);
         if (myTurret == null)
         {
@@ -96,7 +98,7 @@ public class BuildableSquare : MonoBehaviour
         {
             string costText = _player._selectedTurret.GetComponent<Turret>().getPrice().ToString();
             _UIManager.modifyCostText("Cost: " + costText);
-        } else if (buildLevel == 1 || buildLevel == 2)
+        } else if (buildLevel == 1 || buildLevel == 2 && myTurret != null)
         {
             string costText = myTurret.getUpgradePrice(buildLevel).ToString();
             _UIManager.modifyCostText("Cost: " + costText);
@@ -105,6 +107,7 @@ public class BuildableSquare : MonoBehaviour
 
     public void DismantleTurret()
     {
+        _audioSource.volume = 0.4f;
         _audioSource.PlayOneShot(audioClips[1]);
         _player.Transaction(myTurret.getSellPrice());
         //Destroy turret

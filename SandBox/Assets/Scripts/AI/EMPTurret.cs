@@ -32,9 +32,10 @@ public class EMPTurret : Turret
             {
                 EnemyBot enemy = bot.GetComponent<EnemyBot>();
                 enemy.Stun(3);
-                cooldown = 300;
-                _animator.SetBool("Firing", false);
             }
+            firing = false;
+            _animator.SetBool("Firing", false);
+            cooldown = 300;
         }
     }
 

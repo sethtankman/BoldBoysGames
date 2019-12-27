@@ -43,25 +43,16 @@ public class CameraManager : MonoBehaviour
         int lvl = GameData.level;
         if(intensity == 0)
         {
-            if(lvl == 0)
-            {
                 _BackgroundMusic.clip = _Tracks[0];
                 _BackgroundMusic.Play();
-            }
         } else if (intensity == 1)
         {
-            if(lvl == 0)
-            {
                 _BackgroundMusic.clip = _Tracks[1];
                 _BackgroundMusic.Play();
-            }
         } else if (intensity == 2)
         {
-            if (lvl == 0)
-            {
                 _BackgroundMusic.clip = _Tracks[2];
                 _BackgroundMusic.Play();
-            }
         } else if (intensity == 3)
         {
             _BackgroundMusic.clip = _Tracks[3];
