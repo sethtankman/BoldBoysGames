@@ -9,24 +9,35 @@ using UnityEngine.UI;
 
 public class GameData : MonoBehaviour
 {
-    private UIManager _uIManager;
-    public static int level;
-    public static int turretsFound;
     [SerializeField] private GameObject[] turretButtons = new GameObject[2];
+
     public static Dictionary<int, Item> items = new Dictionary<int, Item>();
     public static Dictionary<int, Tuple<Sprite, string>> archives = new Dictionary<int, Tuple<Sprite, string>>();
+    public static int level, turretsFound;
+
+    private UIManager _uIManager;
     
+    /// <summary>
+    /// Performs the item's starting function and adds it to the lowest empty slot in the inventory.
+    /// </summary>
+    /// <param name="item"> The item to be added. </param>
     public void AddItem(Item item)
     {
         item.StartingFunction();
         items.Add(LowestEmptySlot(false), item);
     }
 
+    /// <summary>
+    /// Increments the number of turrets found in the game.
+    /// </summary>
     public void incrementTurretCount()
     {
         turretsFound++;
     }
 
+    /// <summary>
+    /// Retrieves items and data from the previously saved game and loads them to the different UI elements.
+    /// </summary>
     public void LoadItemsAndTurrets()
     {
         if (items == null)
@@ -40,13 +51,13 @@ public class GameData : MonoBehaviour
                 BluePrint bp = (BluePrint)items[i];
             }
         }
-        Debug.Log(turretsFound);
         for(int j =0; j < turretsFound; j++)
         {
             turretButtons[j].SetActive(true);
         }
     }
 
+    // Called when a level is loaded.  Retrieves information from the UIManager and loads data from the previous scene.
     public void OnLevelWasLoaded(int level)
     {
         _uIManager = GameObject.Find("UIManager").GetComponent<UIManager>();
@@ -58,6 +69,11 @@ public class GameData : MonoBehaviour
 
     }
 
+    /// <summary>
+    /// Adds the given sprite and text to the GameData Archives.
+    /// </summary>
+    /// <param name="_sprite"> The sprite to be added. </param>
+    /// <param name="_string"> The description to be added. </param>
     public void AddToArchive(Sprite _sprite, string _string)
     {
         if(archives == null)
@@ -68,6 +84,13 @@ public class GameData : MonoBehaviour
         archives.Add(LowestEmptySlot(true), archiveEntry);
     }
 
+    /// <summary>
+    /// Finds the lowest empty slot either in the items inventory or the archives menu.
+    /// </summary>
+    /// <param name="isArchive"> Whether or not the lowest empty slot is to be found from the archive or 
+    /// the items inventory. 
+    /// </param>
+    /// <returns> the lowest empty slot integer. </returns>
     private int LowestEmptySlot(bool isArchive)
     {
         int i = 0;

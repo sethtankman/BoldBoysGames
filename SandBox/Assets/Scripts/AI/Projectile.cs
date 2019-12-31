@@ -4,16 +4,12 @@ using UnityEngine;
 
 /// <summary>
 /// @author Addison Shuppy
+/// The projectile shot by laser turrets.
 /// </summary>
 public class Projectile : MonoBehaviour
 {
     private GameObject target;
     [SerializeField] private float speed, damage;
-
-    // Start is called before the first frame update
-    void Start()
-    {
-    }
 
     // Update is called once per frame
     void Update()
@@ -35,11 +31,19 @@ public class Projectile : MonoBehaviour
         
     }
 
+    /// <summary>
+    /// Sets the destination for this projectile.
+    /// </summary>
+    /// <param name="_target"></param>
     public void SetTarget(GameObject _target)
     {
         target = _target;
     }
 
+    /// <summary>
+    /// Sets the damage a projectile will do on collision.
+    /// </summary>
+    /// <param name="_damage"> the float amount of damage to do. </param>
     public void SetDamage(float _damage)
     {
         damage = _damage;

@@ -5,6 +5,7 @@ using UnityEngine.UI;
 
 /// <summary>
 /// @author Addison Shuppy
+/// An enemy robot.
 /// </summary>
 public class EnemyBot : MonoBehaviour
 {

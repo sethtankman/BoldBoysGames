@@ -3988,20 +3988,20 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   selectedTurretImage: {fileID: 543880360}
+  lives: 3
+  TurretButtons:
+  - {fileID: 1103486052}
+  - {fileID: 1672086459}
+  pauseMenuUI: {fileID: 565968699}
+  InGameUI: {fileID: 105892264}
+  InstructionsUI: {fileID: 1715594536}
+  LosingScreen: {fileID: 948449615}
   startWaveButton: {fileID: 246376266}
   audioClips:
   - {fileID: 8300000, guid: c6af7cdf60b3a4e24bd0792d3d2fcdfd, type: 3}
   - {fileID: 8300000, guid: a129bf6a1c35f4fcab1dbd4d21ae4bb2, type: 3}
   - {fileID: 8300000, guid: 38a72a61bafec4a82b3c11573747e418, type: 3}
   - {fileID: 8300000, guid: cf6c5e0c6d6b04e06bba5cc4a07cc0bb, type: 3}
-  lives: 3
-  pauseMenuUI: {fileID: 565968699}
-  InGameUI: {fileID: 105892264}
-  InstructionsUI: {fileID: 1715594536}
-  LosingScreen: {fileID: 948449615}
-  TurretButtons:
-  - {fileID: 1103486052}
-  - {fileID: 1672086459}
 --- !u!82 &372094413
 AudioSource:
   m_ObjectHideFlags: 0
@@ -25204,18 +25204,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gBytes: 100
-  _selectedTurret: {fileID: 0}
+  _uiManager: {fileID: 372094412}
   _allTurrets:
   - {fileID: 5756783409194967900, guid: 4c93d6ad0fdd2ba4fae33f5159072685, type: 3}
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
   speed: 4
-  trackMode: 0
+  _selectedTurret: {fileID: 0}
   trackLocation: {x: 0, y: 0, z: 0}
-  _uiManager: {fileID: 372094412}
   _animator: {fileID: 1349959810}
   selectedSquare: {fileID: 0}
+  trackMode: 0
 --- !u!212 &1349959806
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -32273,5 +32273,12 @@ PrefabInstance:
       propertyPath: data
       value: 
       objectReference: {fileID: 897461763}
+    - target: {fileID: 8102507851896459130, guid: 498da2d2ee13f614cba248d1b1ce814e,
+        type: 3}
+      propertyPath: ArchiveDescription
+      value: 'Energy Turret. Level 1- Energy Damage: 8.  Physical Damage: 0.  Level
+        2- Energy damage: 12. Physical Damage: 0. Level 3- Energy Damage: 20.  Physical
+        damage: 0. '
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 498da2d2ee13f614cba248d1b1ce814e, type: 3}

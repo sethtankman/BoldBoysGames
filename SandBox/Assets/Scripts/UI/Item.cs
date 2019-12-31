@@ -3,6 +3,7 @@ using UnityEngine;
 
 /// <summary>
 /// @author Addison Shuppy
+/// The abstract class to lay the basis of all collectable items.
 /// </summary>
 public abstract class Item : MonoBehaviour
 {

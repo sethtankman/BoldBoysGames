@@ -49,7 +49,7 @@ public class SpawnManager0 : MonoBehaviour
         if (wave == 1)
         {
             _GameData.AddToArchive(enemyList[0].GetComponent<SpriteRenderer>().sprite, "These robots were meant to clean house." +
-                "  Nobody ever thought they could go rogue.  Health: 60.  Speed: 2.  GigaBytes: 10.  Damage: 1");
+                "  Nobody ever thought they could go rogue.  Health: 60.  Speed: 2.  GigaBytes: 14.  Damage: 1");
             _CameraManager.PlayTrack(1);
             GameObject bot = Instantiate(enemyList[0], Vector3.zero, Quaternion.identity);
             bot.GetComponent<EnemyBot>().SetPath(path);
@@ -87,8 +87,7 @@ public class SpawnManager0 : MonoBehaviour
             bot = Instantiate(enemyList[0], Vector3.zero, Quaternion.identity);
             bot.GetComponent<EnemyBot>().SetPath(path);
             yield return new WaitForSeconds(5f);
-
-            //slight pause
+            
             bot = Instantiate(enemyList[0], Vector3.zero, Quaternion.identity);
             bot.GetComponent<EnemyBot>().SetPath(path);
             yield return new WaitForSeconds(0.5f);
@@ -178,13 +177,14 @@ public class SpawnManager0 : MonoBehaviour
         }
         else
         {
-            //Debug.Log("Entered Save");
             GameData.level++;
-            //_GameData.SaveGame("C:\Users\addys");
             SceneManager.LoadScene(2);
         }
     }
 
+    /// <summary>
+    /// Resets game after the player loses
+    /// </summary>
     public void ResetGame()
     {
         SceneManager.LoadScene(0);

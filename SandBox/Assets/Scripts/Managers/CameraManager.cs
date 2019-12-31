@@ -4,6 +4,7 @@ using UnityEngine;
 
 /// <summary>
 /// @author Addison Shuppy
+/// Controls the camera, and also the background music.
 /// </summary>
 public class CameraManager : MonoBehaviour
 {
@@ -38,37 +39,14 @@ public class CameraManager : MonoBehaviour
         }
     }
 
-    public void PlayTrack(int intensity)
-    {
-        int lvl = GameData.level;
-        if(intensity == 0)
-        {
-                _BackgroundMusic.clip = _Tracks[0];
-                _BackgroundMusic.Play();
-        } else if (intensity == 1)
-        {
-                _BackgroundMusic.clip = _Tracks[1];
-                _BackgroundMusic.Play();
-        } else if (intensity == 2)
-        {
-                _BackgroundMusic.clip = _Tracks[2];
-                _BackgroundMusic.Play();
-        } else if (intensity == 3)
-        {
-            _BackgroundMusic.clip = _Tracks[3];
-            _BackgroundMusic.Play();
-        } else if (intensity == 4)
-        {
-            _BackgroundMusic.clip = _Tracks[4];
-            _BackgroundMusic.Play();
-        }
-    }
 
-
-    public void EndSequence()
+    /// <summary>
+    /// Plays the track requested from the list made in the Unity Editor
+    /// </summary>
+    /// <param name="trackNum"> the index of teh track in the array of tracks for that level. </param>
+    public void PlayTrack(int trackNum)
     {
-        following = false;
-        //_BackgroundMusic.clip = _Tracks[1];
+        _BackgroundMusic.clip = _Tracks[trackNum];
         _BackgroundMusic.Play();
     }
 }

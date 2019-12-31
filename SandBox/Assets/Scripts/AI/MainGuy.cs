@@ -4,25 +4,27 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+/// <summary>
+/// @author Addison Shuppy
+/// The main character that is able to move and build turrets.
+/// </summary>
 public class MainGuy : MonoBehaviour
 {
-    [SerializeField]
-    public int gBytes;
+    [SerializeField] public int gBytes;
+    [SerializeField] private UIManager _uiManager;
+    [SerializeField] private GameObject[] _allTurrets;
+    [SerializeField] private float speed = 2.0f;
+
     public GameObject _selectedTurret;
-    [SerializeField]
-    private GameObject[] _allTurrets;
-    [SerializeField]
-    private float speed = 2.0f;
-    public bool trackMode = false;
     public Vector3 trackLocation;
-    [SerializeField]
-    private UIManager _uiManager;
-    private GameData _data;
     public Animator _animator;
-    private bool isMoving;
-    private Vector3 change;
-    private Rigidbody2D myRigidBody;
     public BuildableSquare selectedSquare;
+    public bool trackMode = false;
+    
+    private GameData _data;
+    private Rigidbody2D myRigidBody;
+    private Vector3 change;
+    private bool isMoving;
 
     // Start is called before the first frame update
     void Start()
@@ -44,6 +46,9 @@ public class MainGuy : MonoBehaviour
 
     }
 
+    /// <summary>
+    /// Controls all animations involving the player and which direction he is facing.
+    /// </summary>
     private void UpdateAnimationAndMove()
     {
         if (trackMode)
@@ -62,7 +67,7 @@ public class MainGuy : MonoBehaviour
     }
 
     /// <summary>
-    /// Communicates to the UIManager and sets the selected turret to the UI.
+    /// Communicates to the UIManager and sets the selected turret to the UI using numbers.
     /// </summary>
     private void SpriteSet()
     {
@@ -92,11 +97,9 @@ public class MainGuy : MonoBehaviour
         }
     }
 
-    void Update(Vector3 turretLocation)
-    {
-        transform.position = Vector3.MoveTowards(transform.position, turretLocation, Time.deltaTime * speed);
-    }
-
+    /// <summary>
+    /// Controls player movement
+    /// </summary>
     private void Movement()
     {
             myRigidBody.MovePosition(transform.position + change * speed * Time.deltaTime);
@@ -132,13 +135,17 @@ public class MainGuy : MonoBehaviour
     /// <summary>
     /// Handles all transactions involving player purchasing.
     /// </summary>
-    /// <param name="amount"> The amount of GigaBytes to be added or subtracted</param>
+    /// <param name="amount"> The amount of GigaBytes to be added or subtracted. </param>
     public void Transaction(int amount)
     {
         gBytes += amount;
         _uiManager.modifyGBytesText(gBytes.ToString());
     }
 
+    /// <summary>
+    /// Collects items collided with
+    /// </summary>
+    /// <param name="collision"> the collider belonging to the trigger effect. </param>
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.tag == "Item")
@@ -150,6 +157,10 @@ public class MainGuy : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Sets the turret that will be built on left-click
+    /// </summary>
+    /// <param name="gameObject"> the turret object </param>
     public void SetTurret(GameObject gameObject)
     {
         _selectedTurret = gameObject;
