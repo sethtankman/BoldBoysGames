@@ -58,8 +58,19 @@ public class EnemyBot : MonoBehaviour
     /// </summary>
     [SerializeField] private int goldValue;
 
+    /// <summary>
+    /// The indicator of the enemy bot on the minimap.
+    /// </summary>
     [SerializeField] private RawImage indicator;
+
+    /// <summary>
+    /// the change in position of the enemy bot while moving.
+    /// </summary>
     private Vector3 change;
+
+    /// <summary>
+    /// The animator for the robot.
+    /// </summary>
     private Animator _animator;
 
     // Start is called before the first frame update
@@ -131,7 +142,8 @@ public class EnemyBot : MonoBehaviour
         float newHealth = health / maxHealth;
         float prevScale = hBar.localScale.x;
         hBar.localScale = new Vector3(newHealth, 1f);
-        hBar.localPosition -= new Vector3((prevScale - newHealth)/2.2f, 0, 0);
+        //this is where the green health bar is shifted left as it scales down, making it fit with the red background
+        hBar.localPosition -= new Vector3((prevScale - newHealth)/2.5f, 0, 0);
         if(health <= 0)
         {
             Player.GetComponent<MainGuy>().Transaction(goldValue);
@@ -145,10 +157,19 @@ public class EnemyBot : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Starts the stun couroutine.
+    /// </summary>
+    /// <param name="seconds"> the number of seconds to stun the enemy. </param>
     public void Stun(float seconds) { 
         StartCoroutine(StunCoroutine(seconds));
     }
 
+    /// <summary>
+    /// Stuns this enemy in place for a given amount of time.
+    /// </summary>
+    /// <param name="seconds"> the number of seconds to stun this enemy. </param>
+    /// <returns></returns>
     public IEnumerator StunCoroutine(float seconds)
     {
         float prevSpeed = speed;

@@ -56,6 +56,12 @@ public class SpawnManager0 : MonoBehaviour
             yield return new WaitForSeconds(1.5f);
             bot = Instantiate(enemyList[0], Vector3.zero, Quaternion.identity);
             bot.GetComponent<EnemyBot>().SetPath(path);
+            yield return new WaitForSeconds(3);
+            bot = Instantiate(enemyList[0], Vector3.zero, Quaternion.identity);
+            bot.GetComponent<EnemyBot>().SetPath(path);
+            yield return new WaitForSeconds(1);
+            bot = Instantiate(enemyList[0], Vector3.zero, Quaternion.identity);
+            bot.GetComponent<EnemyBot>().SetPath(path);
             yield return new WaitForSeconds(1);
             bot = Instantiate(enemyList[0], Vector3.zero, Quaternion.identity);
             bot.GetComponent<EnemyBot>().SetPath(path);
