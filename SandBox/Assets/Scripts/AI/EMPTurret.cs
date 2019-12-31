@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 /// <summary>
+/// @author Addison Shuppy
 /// A turret that freezes enemies for a short duration
 /// </summary>
 public class EMPTurret : Turret

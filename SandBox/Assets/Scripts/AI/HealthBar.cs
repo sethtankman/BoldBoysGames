@@ -2,6 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// @author Addison Shuppy
+/// Health bars for enemies.
+/// </summary>
 public class HealthBar : MonoBehaviour
 {
     [SerializeField] private float healthBarHeight;

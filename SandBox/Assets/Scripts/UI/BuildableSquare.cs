@@ -4,22 +4,28 @@ using UnityEditor;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
+/// <summary>
+/// @author Addison Shuppy
+/// A buildable square is placed on all turret plates and handles the building of turrets.
+/// </summary>
 public class BuildableSquare : MonoBehaviour
 {
-
-
-    // 0 = basic turret
     [SerializeField] private GameObject[] turrets;
     [SerializeField] private Sprite RangeIndicator;
-    private UIManager _UIManager;
-    private float RangeIndicatorSize;
+
+    public AudioClip[] audioClips;
     public SpriteRenderer rend;
-    private int turretPrice, buildLevel;
+
+    private UIManager _UIManager;
     private MainGuy _player;
     private Turret myTurret;
-    public AudioClip[] audioClips;
     private AudioSource _audioSource;
+    private float RangeIndicatorSize;
+    private int turretPrice, buildLevel;
 
+    /// <summary>
+    /// Called when the game starts.
+    /// </summary>
     void Start()
     {
         _audioSource = GetComponent<AudioSource>();
@@ -28,11 +34,7 @@ public class BuildableSquare : MonoBehaviour
         _player = (MainGuy)FindObjectOfType(typeof(MainGuy));
         rend.enabled = false;
     }
-
-    private void Update()
-    {
-        
-    }
+   
 
     // The mesh shows a green highlight when the mouse enters
     void OnMouseEnter()
@@ -41,7 +43,10 @@ public class BuildableSquare : MonoBehaviour
         DetermineCostText();
     }
 
-    // maybe use this to add an effect while the mouse hovers over it.
+    /// <summary>
+    /// While the mouse is over the square, checks to see if the right-click
+    /// button has been pressed and calls DismantleTurret if it has.
+    /// </summary>
     void OnMouseOver()
     {
         if (Input.GetMouseButtonUp(1))
@@ -56,8 +61,7 @@ public class BuildableSquare : MonoBehaviour
         rend.enabled = false;
     }
 
-    //if clicked
-    //add sprite on top of current sprite, set script to that building's script? 
+    // Activates when mouse button comes up.
     private void OnMouseUp()
     {
         if (_player._selectedTurret != null)
@@ -81,6 +85,10 @@ public class BuildableSquare : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Builds the selected turret on this square and changes the buildable square to display the range of the turret.
+    /// </summary>
+    /// <param name="_selectedTurret"> The turret selected by the player to be built. </param>
     public void BuildTurret(Turret _selectedTurret)
     {
         _audioSource.volume = 0.3f;
@@ -92,28 +100,35 @@ public class BuildableSquare : MonoBehaviour
         myTurret.setLevel(buildLevel);
     }
 
+    /// <summary>
+    /// Determines the cost text to display based on what turret has already been built on this buildable square.
+    /// </summary>
     public void DetermineCostText()
     {
         if(buildLevel == 0)
         {
             string costText = _player._selectedTurret.GetComponent<Turret>().getPrice().ToString();
             _UIManager.modifyCostText("Cost: " + costText);
-        } else if (buildLevel == 1 || buildLevel == 2 && myTurret != null)
+        } else if (myTurret!= null && (buildLevel == 1 || buildLevel == 2))
         {
             string costText = myTurret.getUpgradePrice(buildLevel).ToString();
             _UIManager.modifyCostText("Cost: " + costText);
-        } else { _UIManager.modifyCostText("MAXED"); }
+        } else if (myTurret != null)
+        {
+            _UIManager.modifyCostText("MAXED");
+        }
     }
 
+    /// <summary>
+    /// Dismantles turrets and sells for gigabytes.
+    /// </summary>
     public void DismantleTurret()
     {
         _audioSource.volume = 0.4f;
         _audioSource.PlayOneShot(audioClips[1]);
         _player.Transaction(myTurret.getSellPrice());
-        //Destroy turret
         Destroy(myTurret.gameObject);
         myTurret = null;
-        //Reset buildLevel
         buildLevel = 0;
     }
 }

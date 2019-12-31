@@ -2,6 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// @author Addison Shuppy
+/// The icon representing players and enemies on the minimap.
+/// </summary>
 public class MinimapIcon : MonoBehaviour
 {
     [SerializeField] public GameObject symbolizedObject, mainCamera;
@@ -28,6 +32,9 @@ public class MinimapIcon : MonoBehaviour
         
     }
 
+    /// <summary>
+    /// Changes the player's position on the minimap.
+    /// </summary>
     void UpdatePosition()
     {
         if (symbolizedObject != null)

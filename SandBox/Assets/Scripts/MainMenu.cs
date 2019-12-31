@@ -3,18 +3,23 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
+/// <summary>
+/// @author Addison Shuppy
+/// contains functions from the Main Menu
+/// </summary>
 public class MainMenu : MonoBehaviour
 {
+    /// <summary>
+    /// Progresses to the next scene.
+    /// </summary>
     public void NewGame()
     {
         SceneManager.LoadScene(1);
     }
 
-    public void LoadGame()
-    {
-        Debug.Log("Not implemented");
-    }
-
+    /// <summary>
+    /// Quits the game.
+    /// </summary>
     public void Quit()
     {
         #if UNITY_EDITOR

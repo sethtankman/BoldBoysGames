@@ -2,6 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// @author Addison Shuppy
+/// An abstract class for Turrets.
+/// </summary>
 public abstract class Turret : MonoBehaviour
 {
     //[SerializeField] public Sprite InventorySprite;
@@ -10,8 +14,18 @@ public abstract class Turret : MonoBehaviour
     //public Sprite ArchiveSprite;
     //public string InventoryDescription, ArchiveDescription;
     //public abstract void StartingFunction();
+
+    /// <summary>
+    /// The type of turret this one is.
+    /// </summary>
     protected int id;
+    /// <summary>
+    /// The audioclip to play when a shot is fired.
+    /// </summary>
     public AudioClip ShotSound;
+    /// <summary>
+    /// True if a target is in range.
+    /// </summary>
     public bool firing;
 
     // Update is called once per frame

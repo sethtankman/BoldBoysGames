@@ -325,6 +325,10 @@ public class SpawnManager1 : MonoBehaviour
             credits.SetActive(true);
         }
     }
+
+    /// <summary>
+    /// Resets game after the player loses
+    /// </summary>
     public void ResetGame()
     {
         SceneManager.LoadScene(0);

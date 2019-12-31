@@ -4,15 +4,38 @@ using UnityEngine;
 
 /// <summary>
 /// @author Addison Shuppy
+/// A turret that shoots lasers. 
 /// </summary>
 public class LaserTurret : Turret
 {
+    /// <summary>
+    /// The current laser the turret is shooting.
+    /// </summary>
     [SerializeField] private GameObject _laser;
+
+    /// <summary>
+    /// The animator of this object.
+    /// </summary>
     [SerializeField] private Animator _animator;
+
+    /// <summary>
+    /// The different kinds of lasers this turret can shoot.
+    /// </summary>
     [SerializeField] private GameObject[] _lasers;
 
+    /// <summary>
+    /// the current level of the turret.
+    /// </summary>
     private int lvl;
+
+    /// <summary>
+    /// The current recipient of lasers.
+    /// </summary>
     private GameObject activeTarget;
+
+    /// <summary>
+    /// The queue of enemies in range
+    /// </summary>
     private List<GameObject> queue;
     
     // Start is called before the first frame update

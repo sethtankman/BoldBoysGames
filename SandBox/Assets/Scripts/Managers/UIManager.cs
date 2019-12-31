@@ -17,24 +17,29 @@ public class UIManager : MonoBehaviour
     [SerializeField] private Image selectedTurretImage;
 
     /// <summary>
+    /// The number of lives the player has.
+    /// </summary>
+    [SerializeField] private int lives;
+
+    public static bool gamePaused;
+    public GameObject[] TurretButtons;
+    public GameObject pauseMenuUI, InGameUI, InstructionsUI, LosingScreen, startWaveButton;
+
+    /// <summary>
+    /// The list of all audioClips used by the UIManager.
+    /// </summary>
+    public AudioClip[] audioClips;
+
+    /// <summary>
     /// The turret in the selected turret box.
     /// </summary>
     private GameObject selectedTurret;
-
-    /// <summary>
-    /// The button at the top of the screen that starts the wave of enemies.
-    /// </summary>
-    public GameObject startWaveButton;
 
     /// <summary>
     /// The text that displays how many GigaBytes (currency) the player has.
     /// </summary>
     private Text gBText;
 
-    /// <summary>
-    /// The list of all audioClips used by the UIManager.
-    /// </summary>
-    public AudioClip[] audioClips;
 
     /// <summary>
     /// The audioSource of the UIManager.
@@ -46,18 +51,11 @@ public class UIManager : MonoBehaviour
     /// </summary>
     private Text livesText;
 
-    /// <summary>
-    /// The number of lives the player has.
-    /// </summary>
-    [SerializeField] private int lives;
     private Text costText;
 
-    public static bool gamePaused;
-    public GameObject pauseMenuUI, InGameUI, InstructionsUI, LosingScreen;
     private GameObject BuildableSquares, CameraManager;
     private MainGuy Player;
     private Button[] InventoryButtons;
-    public GameObject[] TurretButtons;
 
     // Start is called before the first frame update
     void Start()
@@ -125,49 +123,80 @@ public class UIManager : MonoBehaviour
         gamePaused = false;
     }
 
+    /// <summary>
+    /// Sets the selected turret image.
+    /// </summary>
+    /// <param name="num"> The index of the turret sprite to be displayed. </param>
     public void SetSprite(int num)
     {
         selectedTurretImage.sprite = allTurrets[num].GetComponent<SpriteRenderer>().sprite;
     }
 
+    /// <summary>
+    /// Loses lives and deals with consequences of running out of lives, including dying.
+    /// </summary>
+    /// <param name="livesLost"> The number of lives to lose. </param>
     public void loseLives(int livesLost)
     {
         _audioSource.volume = 1;
         _audioSource.PlayOneShot(audioClips[3]);
         lives -= livesLost;
         livesText.text = lives.ToString();
-        if(lives <= 0)
+        if (lives <= 0)
         {
             CameraManager.GetComponent<CameraManager>().PlayTrack(3);
             LosingScreen.SetActive(true);
         }
     }
 
+
+    /// <summary>
+    /// Disables the start button until the level is completed.
+    /// </summary>
     public void DisableStartButton()
     {
         startWaveButton.SetActive(false);
     }
 
+    /// <summary>
+    /// Enables the start button to move on to the next wave. 
+    /// </summary>
     public void EnableStartButton()
     {
         startWaveButton.SetActive(true);
     }
 
+    /// <summary>
+    /// Enables the button of the turret just collected. 
+    /// </summary>
+    /// <param name="buttonNum"> the index of the button on the list of all turret buttons. </param>
     public void EnableTurretButton(int buttonNum)
     {
         TurretButtons[buttonNum].SetActive(true);
     }
 
+    /// <summary>
+    /// Changes the text that displays the number of gigabytes the player has.
+    /// </summary>
+    /// <param name="newDisplay"> the new value to display </param>
     public void modifyGBytesText(string newDisplay)
     {
         gBText.text = newDisplay;
     }
 
+    /// <summary>
+    /// Changes the cost text on the UI.
+    /// </summary>
+    /// <param name="newDisplay"> the text to display. </param>
     public void modifyCostText(string newDisplay)
     {
         costText.text = newDisplay;
     }
 
+    /// <summary>
+    /// Sets the turret to the given index and reports the cost in the UI.
+    /// </summary>
+    /// <param name="index"> The index of the turret in the list of all turrets. </param>
     public void SetTurret(int index)
     {
         GameObject turret = allTurrets[index];
@@ -177,17 +206,14 @@ public class UIManager : MonoBehaviour
         costText.text = "Cost: " + cost;
     }
 
+    /// <summary>
+    /// Plays UI sounds
+    /// </summary>
+    /// <param name="i"> the index of the UI sound in the array of sounds to be played.</param>
     public void UISound(int i)
     {
-        if(i == 1)
-        {
-            _audioSource.volume = 1;
-            _audioSource.PlayOneShot(audioClips[1]);
-        } else if(i == 2)
-        {
-            _audioSource.volume = 1;
-            _audioSource.PlayOneShot(audioClips[2]);
-        }
+        _audioSource.volume = 1;
+        _audioSource.PlayOneShot(audioClips[i]);
     }
 
 }
