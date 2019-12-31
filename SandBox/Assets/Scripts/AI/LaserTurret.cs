@@ -23,7 +23,10 @@ public class LaserTurret : Turret
         queue = new List<GameObject>();
     }
 
-    // Update is called once per frame
+    /// <summary>
+    /// Called when the animation reaches the firing frame. 
+    /// Instantiates a laser that does damage depending on level of the turret.
+    /// </summary>
     public override void FireShot()
     {
         if(activeTarget != null)

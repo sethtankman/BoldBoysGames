@@ -102,7 +102,7 @@ public class BuildableSquare : MonoBehaviour
         {
             string costText = myTurret.getUpgradePrice(buildLevel).ToString();
             _UIManager.modifyCostText("Cost: " + costText);
-        } else { _UIManager.modifyCostText("Cannot Upgrade"); }
+        } else { _UIManager.modifyCostText("MAXED"); }
     }
 
     public void DismantleTurret()

@@ -123,7 +123,7 @@ MonoBehaviour:
   speed: 2
   health: 60
   damage: 1
-  goldValue: 10
+  goldValue: 14
   indicator: {fileID: 4094969051332992580, guid: 0cf0e85d2f843104bac1c52a77b35bb9,
     type: 3}
 --- !u!50 &5688856242534927360

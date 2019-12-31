@@ -57,6 +57,10 @@ public class CameraManager : MonoBehaviour
         {
             _BackgroundMusic.clip = _Tracks[3];
             _BackgroundMusic.Play();
+        } else if (intensity == 4)
+        {
+            _BackgroundMusic.clip = _Tracks[4];
+            _BackgroundMusic.Play();
         }
     }
 
