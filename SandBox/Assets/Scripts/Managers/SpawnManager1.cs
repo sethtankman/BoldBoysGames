@@ -21,6 +21,8 @@ public class SpawnManager1 : MonoBehaviour
     private CameraManager _CameraManager;
     private GameData _GameData;
 
+    public int numEnemies;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -47,282 +49,104 @@ public class SpawnManager1 : MonoBehaviour
         wave++;
         if(wave == 1)
         {
-            _GameData.AddToArchive(enemyList[0].GetComponent<SpriteRenderer>().sprite, "These robots were meant to clean house." +
-                "  Nobody ever thought they could go rogue.  Health: 60.  Speed: 2.  GigaBytes: 10.  Damage: 1");
-            _GameData.AddToArchive(enemyList[1].GetComponent<SpriteRenderer>().sprite, "Human sized, but not just any human size." +
-                "  Just as large as people who performed physical labor used to be. Hubba hubba." +
-                "  Health: 140.  Speed: 1.5.  GigaBytes: 25.  Damage: 3");
             _CameraManager.PlayTrack(1);
+            numEnemies = 3;
             GameObject bot = Instantiate(enemyList[0], Vector3.zero, Quaternion.identity);
             bot.GetComponent<EnemyBot>().SetPath(path1);
             bot = Instantiate(enemyList[0], Vector3.zero, Quaternion.identity);
             bot.GetComponent<EnemyBot>().SetPath(path2);
             yield return new WaitForSeconds(1);
-            bot = Instantiate(enemyList[0], Vector3.zero, Quaternion.identity);
-            bot.GetComponent<EnemyBot>().SetPath(path2);
+            yield return SpawnEnemies(0, path2, 0, 1, true);
         }
         else if (wave == 2)
         {
             _CameraManager.PlayTrack(1);
+            numEnemies = 9;
             GameObject bot = Instantiate(enemyList[0], Vector3.zero, Quaternion.identity);
             bot.GetComponent<EnemyBot>().SetPath(path1);
-            bot = Instantiate(enemyList[1], Vector3.zero, Quaternion.identity);
-            bot.GetComponent<EnemyBot>().SetPath(path2);
-            yield return new WaitForSeconds(1);
-            bot = Instantiate(enemyList[1], Vector3.zero, Quaternion.identity);
-            bot.GetComponent<EnemyBot>().SetPath(path2);
+            yield return SpawnEnemies(1, path2, 1, 2, true);
             yield return new WaitForSeconds(4);
-            bot = Instantiate(enemyList[0], Vector3.zero, Quaternion.identity);
-            bot.GetComponent<EnemyBot>().SetPath(path1);
-            yield return new WaitForSeconds(1);
-            bot = Instantiate(enemyList[0], Vector3.zero, Quaternion.identity);
-            bot.GetComponent<EnemyBot>().SetPath(path1);
+            yield return SpawnEnemies(0, path1, 1, 2, true);
             yield return new WaitForSeconds(4);
-            bot = Instantiate(enemyList[0], Vector3.zero, Quaternion.identity);
-            bot.GetComponent<EnemyBot>().SetPath(path2);
-            yield return new WaitForSeconds(1);
-            bot = Instantiate(enemyList[0], Vector3.zero, Quaternion.identity);
-            bot.GetComponent<EnemyBot>().SetPath(path2);
-            yield return new WaitForSeconds(1);
-            bot = Instantiate(enemyList[0], Vector3.zero, Quaternion.identity);
-            bot.GetComponent<EnemyBot>().SetPath(path2);
-            yield return new WaitForSeconds(1);
-            bot = Instantiate(enemyList[0], Vector3.zero, Quaternion.identity);
-            bot.GetComponent<EnemyBot>().SetPath(path2);
+            yield return SpawnEnemies(0, path2, 1, 4, true);
         }
         else if (wave == 3)
         {
             _CameraManager.PlayTrack(1);
+            numEnemies = 16;
             GameObject bot = Instantiate(enemyList[0], Vector3.zero, Quaternion.identity);
             bot.GetComponent<EnemyBot>().SetPath(path1);
             yield return new WaitForSeconds(3f);
-            bot = Instantiate(enemyList[0], Vector3.zero, Quaternion.identity);
-            bot.GetComponent<EnemyBot>().SetPath(path1);
-            yield return new WaitForSeconds(0.5f);
-            bot = Instantiate(enemyList[0], Vector3.zero, Quaternion.identity);
-            bot.GetComponent<EnemyBot>().SetPath(path1);
-            yield return new WaitForSeconds(0.5f);
-            bot = Instantiate(enemyList[0], Vector3.zero, Quaternion.identity);
-            bot.GetComponent<EnemyBot>().SetPath(path2);
-            yield return new WaitForSeconds(0.5f);
-            bot = Instantiate(enemyList[1], Vector3.zero, Quaternion.identity);
-            bot.GetComponent<EnemyBot>().SetPath(path2);
-            yield return new WaitForSeconds(0.5f);
-            bot = Instantiate(enemyList[1], Vector3.zero, Quaternion.identity);
-            bot.GetComponent<EnemyBot>().SetPath(path2);
-            yield return new WaitForSeconds(0.5f);
-            bot = Instantiate(enemyList[1], Vector3.zero, Quaternion.identity);
-            bot.GetComponent<EnemyBot>().SetPath(path2);
-            yield return new WaitForSeconds(1f);
-            bot = Instantiate(enemyList[1], Vector3.zero, Quaternion.identity);
-            bot.GetComponent<EnemyBot>().SetPath(path2);
-            yield return new WaitForSeconds(1);
-            bot = Instantiate(enemyList[0], Vector3.zero, Quaternion.identity);
-            bot.GetComponent<EnemyBot>().SetPath(path2);
-            yield return new WaitForSeconds(1);
-            bot = Instantiate(enemyList[0], Vector3.zero, Quaternion.identity);
-            bot.GetComponent<EnemyBot>().SetPath(path2);
-            yield return new WaitForSeconds(1);
-            bot = Instantiate(enemyList[0], Vector3.zero, Quaternion.identity);
-            bot.GetComponent<EnemyBot>().SetPath(path2);
-            yield return new WaitForSeconds(1f);
-            bot = Instantiate(enemyList[0], Vector3.zero, Quaternion.identity);
-            bot.GetComponent<EnemyBot>().SetPath(path2);
-            yield return new WaitForSeconds(0.5f);
-            bot = Instantiate(enemyList[0], Vector3.zero, Quaternion.identity);
-            bot.GetComponent<EnemyBot>().SetPath(path2);
-            yield return new WaitForSeconds(0.5f);
-            bot = Instantiate(enemyList[0], Vector3.zero, Quaternion.identity);
-            bot.GetComponent<EnemyBot>().SetPath(path2);
-            yield return new WaitForSeconds(0.5f);
-            bot = Instantiate(enemyList[0], Vector3.zero, Quaternion.identity);
-            bot.GetComponent<EnemyBot>().SetPath(path1);
-            yield return new WaitForSeconds(0.5f);
-            bot = Instantiate(enemyList[0], Vector3.zero, Quaternion.identity);
-            bot.GetComponent<EnemyBot>().SetPath(path1);
+            yield return SpawnEnemies(0, path1, 0.5f, 2, false);
+            yield return SpawnEnemies(0, path2, 0.5f, 1, false);
+            yield return SpawnEnemies(1, path2, 0.5f, 2, false);
+            yield return SpawnEnemies(1, path2, 1, 2, false);
+            yield return SpawnEnemies(0, path2, 1, 3, false);
+            yield return SpawnEnemies(0, path2, 0.5f, 3, false);
+            yield return SpawnEnemies(0, path1, 0.5f, 2, true);
         }
         else if (wave == 4)
         {
             _CameraManager.PlayTrack(2);
-            GameObject bot = Instantiate(enemyList[0], Vector3.zero, Quaternion.identity);
-            bot.GetComponent<EnemyBot>().SetPath(path2);
-            yield return new WaitForSeconds(0.5f);
-            bot = Instantiate(enemyList[0], Vector3.zero, Quaternion.identity);
-            bot.GetComponent<EnemyBot>().SetPath(path2);
-            yield return new WaitForSeconds(0.5f);
-            bot = Instantiate(enemyList[0], Vector3.zero, Quaternion.identity);
-            bot.GetComponent<EnemyBot>().SetPath(path2);
-            yield return new WaitForSeconds(0.5f);
-            bot = Instantiate(enemyList[0], Vector3.zero, Quaternion.identity);
-            bot.GetComponent<EnemyBot>().SetPath(path2);
-            yield return new WaitForSeconds(0.5f);
-            bot = Instantiate(enemyList[0], Vector3.zero, Quaternion.identity);
-            bot.GetComponent<EnemyBot>().SetPath(path2);
-            yield return new WaitForSeconds(0.5f);
-            bot = Instantiate(enemyList[0], Vector3.zero, Quaternion.identity);
-            bot.GetComponent<EnemyBot>().SetPath(path2);
-            yield return new WaitForSeconds(0.5f);
-            bot = Instantiate(enemyList[0], Vector3.zero, Quaternion.identity);
-            bot.GetComponent<EnemyBot>().SetPath(path2);
-            yield return new WaitForSeconds(0.5f);
-            bot = Instantiate(enemyList[0], Vector3.zero, Quaternion.identity);
-            bot.GetComponent<EnemyBot>().SetPath(path2);
-            yield return new WaitForSeconds(5);
-            bot = Instantiate(enemyList[1], Vector3.zero, Quaternion.identity);
-            bot.GetComponent<EnemyBot>().SetPath(path2);
-            bot = Instantiate(enemyList[0], Vector3.zero, Quaternion.identity);
-            bot.GetComponent<EnemyBot>().SetPath(path1);
-            yield return new WaitForSeconds(1);
-            bot = Instantiate(enemyList[1], Vector3.zero, Quaternion.identity);
-            bot.GetComponent<EnemyBot>().SetPath(path2);
-            bot = Instantiate(enemyList[0], Vector3.zero, Quaternion.identity);
-            bot.GetComponent<EnemyBot>().SetPath(path1);
-            yield return new WaitForSeconds(1);
-            bot = Instantiate(enemyList[1], Vector3.zero, Quaternion.identity);
-            bot.GetComponent<EnemyBot>().SetPath(path2);
-            bot = Instantiate(enemyList[0], Vector3.zero, Quaternion.identity);
-            bot.GetComponent<EnemyBot>().SetPath(path1);
-            yield return new WaitForSeconds(1);
-            bot = Instantiate(enemyList[1], Vector3.zero, Quaternion.identity);
-            bot.GetComponent<EnemyBot>().SetPath(path2);
+            numEnemies = 63;
+            yield return SpawnEnemies(0, path2, 0.5f, 7, false);
+            yield return SpawnEnemies(0, path2, 5, 1, false);
+            yield return SpawnEnemies(1, path2, 0, 1, false);
+            yield return SpawnEnemies(0, path1, 1, 1, false);
+            yield return SpawnEnemies(1, path2, 0, 1, false);
+
+            yield return SpawnEnemies(0, path1, 1, 1, false);
+            yield return SpawnEnemies(1, path2, 0, 1, false);
+            yield return SpawnEnemies(0, path1, 1, 1, false);
+            yield return SpawnEnemies(1, path2, 2, 1, false);
+            yield return SpawnEnemies(0, path2, 1, 1, false);
+
+            yield return SpawnEnemies(1, path2, 0, 1, false);
+            yield return SpawnEnemies(0, path2, 1, 3, false);
+            yield return SpawnEnemies(0, path1, 1, 1, false);
+            yield return SpawnEnemies(0, path1, 0, 1, false);
+            yield return SpawnEnemies(1, path2, 1, 1, false);
+            yield return SpawnEnemies(0, path1, 0, 1, false);
+
+            yield return SpawnEnemies(1, path2, 1, 1, false);
+            yield return SpawnEnemies(0, path1, 1, 2, true);
+            yield return SpawnEnemies(0, path2, 1, 1, false);
+            yield return SpawnEnemies(0, path1, 0, 1, false);
+            yield return SpawnEnemies(0, path2, 10, 1, false);
+
+            yield return SpawnEnemies(1, path2, 0.2f, 10, true);
             yield return new WaitForSeconds(2);
-            bot = Instantiate(enemyList[0], Vector3.zero, Quaternion.identity);
-            bot.GetComponent<EnemyBot>().SetPath(path2);
-            yield return new WaitForSeconds(1);
-            bot = Instantiate(enemyList[1], Vector3.zero, Quaternion.identity);
-            bot.GetComponent<EnemyBot>().SetPath(path2);
-            bot = Instantiate(enemyList[0], Vector3.zero, Quaternion.identity);
-            bot.GetComponent<EnemyBot>().SetPath(path2);
-            yield return new WaitForSeconds(1);
-            bot = Instantiate(enemyList[0], Vector3.zero, Quaternion.identity);
-            bot.GetComponent<EnemyBot>().SetPath(path2);
-            yield return new WaitForSeconds(1);
-            bot = Instantiate(enemyList[0], Vector3.zero, Quaternion.identity);
-            bot.GetComponent<EnemyBot>().SetPath(path2);
-            yield return new WaitForSeconds(1);
-            bot = Instantiate(enemyList[0], Vector3.zero, Quaternion.identity);
-            bot.GetComponent<EnemyBot>().SetPath(path1);
-            yield return new WaitForSeconds(1);
-            bot = Instantiate(enemyList[0], Vector3.zero, Quaternion.identity);
-            bot.GetComponent<EnemyBot>().SetPath(path1);
-            bot = Instantiate(enemyList[1], Vector3.zero, Quaternion.identity);
-            bot.GetComponent<EnemyBot>().SetPath(path2);
-            yield return new WaitForSeconds(1);
-            bot = Instantiate(enemyList[0], Vector3.zero, Quaternion.identity);
-            bot.GetComponent<EnemyBot>().SetPath(path1);
-            bot = Instantiate(enemyList[1], Vector3.zero, Quaternion.identity);
-            bot.GetComponent<EnemyBot>().SetPath(path2);
-            yield return new WaitForSeconds(1);
-            bot = Instantiate(enemyList[0], Vector3.zero, Quaternion.identity);
-            bot.GetComponent<EnemyBot>().SetPath(path1);
-            yield return new WaitForSeconds(1);
-            bot = Instantiate(enemyList[0], Vector3.zero, Quaternion.identity);
-            bot.GetComponent<EnemyBot>().SetPath(path1);
-            bot = Instantiate(enemyList[0], Vector3.zero, Quaternion.identity);
-            bot.GetComponent<EnemyBot>().SetPath(path2);
-            yield return new WaitForSeconds(1);
-            bot = Instantiate(enemyList[0], Vector3.zero, Quaternion.identity);
-            bot.GetComponent<EnemyBot>().SetPath(path1);
-            bot = Instantiate(enemyList[0], Vector3.zero, Quaternion.identity);
-            bot.GetComponent<EnemyBot>().SetPath(path2);
-            yield return new WaitForSeconds(10);
-            bot = Instantiate(enemyList[1], Vector3.zero, Quaternion.identity);
-            bot.GetComponent<EnemyBot>().SetPath(path2);
-            yield return new WaitForSeconds(0.2f);
-            bot = Instantiate(enemyList[1], Vector3.zero, Quaternion.identity);
-            bot.GetComponent<EnemyBot>().SetPath(path2);
-            yield return new WaitForSeconds(0.2f);
-            bot = Instantiate(enemyList[1], Vector3.zero, Quaternion.identity);
-            bot.GetComponent<EnemyBot>().SetPath(path2);
-            yield return new WaitForSeconds(0.2f);
-            bot = Instantiate(enemyList[1], Vector3.zero, Quaternion.identity);
-            bot.GetComponent<EnemyBot>().SetPath(path2);
-            yield return new WaitForSeconds(0.2f);
-            bot = Instantiate(enemyList[1], Vector3.zero, Quaternion.identity);
-            bot.GetComponent<EnemyBot>().SetPath(path2);
-            yield return new WaitForSeconds(0.2f);
-            bot = Instantiate(enemyList[1], Vector3.zero, Quaternion.identity);
-            bot.GetComponent<EnemyBot>().SetPath(path2);
-            yield return new WaitForSeconds(0.2f);
-            bot = Instantiate(enemyList[1], Vector3.zero, Quaternion.identity);
-            bot.GetComponent<EnemyBot>().SetPath(path2);
-            yield return new WaitForSeconds(0.2f);
-            bot = Instantiate(enemyList[1], Vector3.zero, Quaternion.identity);
-            bot.GetComponent<EnemyBot>().SetPath(path2);
-            yield return new WaitForSeconds(0.2f);
-            bot = Instantiate(enemyList[1], Vector3.zero, Quaternion.identity);
-            bot.GetComponent<EnemyBot>().SetPath(path2);
-            yield return new WaitForSeconds(0.2f);
-            bot = Instantiate(enemyList[1], Vector3.zero, Quaternion.identity);
-            bot.GetComponent<EnemyBot>().SetPath(path2);
-            yield return new WaitForSeconds(2);
-            bot = Instantiate(enemyList[0], Vector3.zero, Quaternion.identity);
-            bot.GetComponent<EnemyBot>().SetPath(path1);
-            bot = Instantiate(enemyList[0], Vector3.zero, Quaternion.identity);
-            bot.GetComponent<EnemyBot>().SetPath(path2);
-            yield return new WaitForSeconds(0.2f);
-            bot = Instantiate(enemyList[0], Vector3.zero, Quaternion.identity);
-            bot.GetComponent<EnemyBot>().SetPath(path1);
-            bot = Instantiate(enemyList[0], Vector3.zero, Quaternion.identity);
-            bot.GetComponent<EnemyBot>().SetPath(path2);
-            yield return new WaitForSeconds(0.2f);
-            bot = Instantiate(enemyList[0], Vector3.zero, Quaternion.identity);
-            bot.GetComponent<EnemyBot>().SetPath(path1);
-            bot = Instantiate(enemyList[0], Vector3.zero, Quaternion.identity);
-            bot.GetComponent<EnemyBot>().SetPath(path2);
-            yield return new WaitForSeconds(0.2f);
-            bot = Instantiate(enemyList[0], Vector3.zero, Quaternion.identity);
-            bot.GetComponent<EnemyBot>().SetPath(path1);
-            bot = Instantiate(enemyList[0], Vector3.zero, Quaternion.identity);
-            bot.GetComponent<EnemyBot>().SetPath(path2);
-            yield return new WaitForSeconds(0.2f);
-            bot = Instantiate(enemyList[0], Vector3.zero, Quaternion.identity);
-            bot.GetComponent<EnemyBot>().SetPath(path1);
-            bot = Instantiate(enemyList[0], Vector3.zero, Quaternion.identity);
-            bot.GetComponent<EnemyBot>().SetPath(path2);
-            yield return new WaitForSeconds(0.2f);
-            bot = Instantiate(enemyList[0], Vector3.zero, Quaternion.identity);
-            bot.GetComponent<EnemyBot>().SetPath(path1);
-            bot = Instantiate(enemyList[0], Vector3.zero, Quaternion.identity);
-            bot.GetComponent<EnemyBot>().SetPath(path2);
-            yield return new WaitForSeconds(0.2f);
-            bot = Instantiate(enemyList[0], Vector3.zero, Quaternion.identity);
-            bot.GetComponent<EnemyBot>().SetPath(path2);
-            yield return new WaitForSeconds(0.2f);
-            bot = Instantiate(enemyList[0], Vector3.zero, Quaternion.identity);
-            bot.GetComponent<EnemyBot>().SetPath(path2);
-            yield return new WaitForSeconds(0.2f);
-            bot = Instantiate(enemyList[0], Vector3.zero, Quaternion.identity);
-            bot.GetComponent<EnemyBot>().SetPath(path2);
-            yield return new WaitForSeconds(0.2f);
-            bot = Instantiate(enemyList[0], Vector3.zero, Quaternion.identity);
-            bot.GetComponent<EnemyBot>().SetPath(path2);
-            yield return new WaitForSeconds(0.2f);
-            bot = Instantiate(enemyList[0], Vector3.zero, Quaternion.identity);
-            bot.GetComponent<EnemyBot>().SetPath(path2);
-            yield return new WaitForSeconds(0.2f);
-            bot = Instantiate(enemyList[0], Vector3.zero, Quaternion.identity);
-            bot.GetComponent<EnemyBot>().SetPath(path2);
-            yield return new WaitForSeconds(0.2f);
-            bot = Instantiate(enemyList[0], Vector3.zero, Quaternion.identity);
-            bot.GetComponent<EnemyBot>().SetPath(path2);
-            yield return new WaitForSeconds(0.2f);
-            bot = Instantiate(enemyList[0], Vector3.zero, Quaternion.identity);
-            bot.GetComponent<EnemyBot>().SetPath(path2);
-            yield return new WaitForSeconds(0.2f);
-            bot = Instantiate(enemyList[0], Vector3.zero, Quaternion.identity);
-            bot.GetComponent<EnemyBot>().SetPath(path2);
-            yield return new WaitForSeconds(0.2f);
-            bot = Instantiate(enemyList[0], Vector3.zero, Quaternion.identity);
-            bot.GetComponent<EnemyBot>().SetPath(path2);
-            yield return new WaitForSeconds(0.2f);
-            bot = Instantiate(enemyList[0], Vector3.zero, Quaternion.identity);
-            bot.GetComponent<EnemyBot>().SetPath(path2);
+            yield return SpawnEnemies(0, path1, 0, 1, false);
+            yield return SpawnEnemies(0, path2, 0.2f, 1, false);
+            yield return SpawnEnemies(0, path1, 0, 1, false);
+            yield return SpawnEnemies(0, path2, 0.2f, 1, false);
+
+            yield return SpawnEnemies(0, path1, 0, 1, false);
+            yield return SpawnEnemies(0, path2, 0.2f, 1, false);
+            yield return SpawnEnemies(0, path1, 0, 1, false);
+            yield return SpawnEnemies(0, path2, 0.2f, 1, false);
+            yield return SpawnEnemies(0, path1, 0, 1, false);
+
+            yield return SpawnEnemies(0, path2, 0.2f, 1, false);
+            yield return SpawnEnemies(0, path1, 0, 1, false);
+            yield return SpawnEnemies(0, path2, 0.2f, 12, true);
         }
         else if(wave == 5)
         {
             _CameraManager.PlayTrack(4);
             credits.SetActive(true);
+        }
+    }
+
+    public IEnumerator SpawnEnemies(int enemyID, GameObject[] _path, float spacing, int count, bool isFinal)
+    {
+        for (int i = 0; i < count; i++)
+        {
+            GameObject bot = Instantiate(enemyList[enemyID], Vector3.zero, Quaternion.identity);
+            bot.GetComponent<EnemyBot>().SetPath(_path);
+            if (!isFinal || i != count - 1)
+                yield return new WaitForSeconds(spacing);
+            else { yield return new WaitForSeconds(0); }
         }
     }
 

@@ -9,6 +9,13 @@ using UnityEngine.SceneManagement;
 /// </summary>
 public class MainMenu : MonoBehaviour
 {
+    private GameObject GameDataObj;
+
+    public void Start()
+    {
+        GameDataObj = GameObject.Find("GameData");
+        Wipe();
+    }
     /// <summary>
     /// Progresses to the next scene.
     /// </summary>
@@ -27,5 +34,10 @@ public class MainMenu : MonoBehaviour
         #else
             Application.Quit();
         #endif
+    }
+
+    private void Wipe()
+    {
+        GameDataObj.GetComponent<GameData>().Wipe();
     }
 }

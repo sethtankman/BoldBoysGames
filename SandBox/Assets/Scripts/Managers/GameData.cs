@@ -60,13 +60,11 @@ public class GameData : MonoBehaviour
     // Called when a level is loaded.  Retrieves information from the UIManager and loads data from the previous scene.
     public void OnLevelWasLoaded(int level)
     {
-        _uIManager = GameObject.Find("UIManager").GetComponent<UIManager>();
-        if(_uIManager == null)
-        {
-            Debug.Log("UIManager not found");
-        }
+        if (GameObject.Find("UIManager"))
+            _uIManager = GameObject.Find("UIManager").GetComponent<UIManager>();
+        if (level == 0)
+            Wipe();
         LoadItemsAndTurrets();
-
     }
 
     /// <summary>
@@ -156,4 +154,12 @@ public class GameData : MonoBehaviour
         }
     }
 
+    public void Wipe()
+    {
+        turretButtons = new GameObject[2];
+        items = new Dictionary<int, Item>();
+        archives = new Dictionary<int, Tuple<Sprite, string>>();
+        level = 0;
+        turretsFound = 0;
+    }
 }

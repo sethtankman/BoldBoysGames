@@ -76,24 +76,16 @@ public class MainGuy : MonoBehaviour
             if (GameObject.Find("Turret1Button"))
             {
                 _uiManager.SetTurret(0);
-                _uiManager.EnableStartButton();
                 _uiManager.UISound(1);
             }
         }
         else if (Input.GetKeyDown(KeyCode.Alpha2))
         {
-            _uiManager.SetSprite(1);
-            _selectedTurret = _allTurrets[1];
-        }
-        else if (Input.GetKeyDown(KeyCode.Alpha3))
-        {
-            _uiManager.SetSprite(2);
-            _selectedTurret = _allTurrets[2];
-        }
-        else if (Input.GetKeyDown(KeyCode.Alpha4))
-        {
-            _uiManager.SetSprite(3);
-            _selectedTurret = _allTurrets[3];
+            if (GameObject.Find("Turret2Button"))
+            {
+                _uiManager.SetTurret(1);
+                _uiManager.UISound(1);
+            }
         }
     }
 
@@ -103,7 +95,6 @@ public class MainGuy : MonoBehaviour
     private void Movement()
     {
             myRigidBody.MovePosition(transform.position + change * speed * Time.deltaTime);
-
     }
 
     /// <summary>
@@ -153,7 +144,7 @@ public class MainGuy : MonoBehaviour
             _data.AddItem(collision.gameObject.GetComponent<Item>());
             _data.AddToArchive(collision.gameObject.GetComponent<Item>().ArchiveSprite, collision.gameObject.GetComponent<Item>().ArchiveDescription);
             Destroy(collision.gameObject);
-
+            _uiManager.EnableStartButton();
         }
     }
 
