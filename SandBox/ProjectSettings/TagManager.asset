@@ -7,6 +7,7 @@ TagManager:
   - TurnSignal
   - Enemy
   - Item
+  - Wall
   layers:
   - Default
   - TransparentFX

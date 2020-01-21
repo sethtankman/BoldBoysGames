@@ -40,7 +40,8 @@ public class BuildableSquare : MonoBehaviour
     void OnMouseEnter()
     {
         rend.enabled = true;
-        DetermineCostText();
+        if(_player._selectedTurret)
+            DetermineCostText();
     }
 
     /// <summary>
@@ -49,7 +50,7 @@ public class BuildableSquare : MonoBehaviour
     /// </summary>
     void OnMouseOver()
     {
-        if (Input.GetMouseButtonUp(1))
+        if (Input.GetMouseButtonUp(1) && myTurret != null)
         {
             DismantleTurret();
         }

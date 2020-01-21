@@ -10,14 +10,9 @@ using UnityEngine.UI;
 public class EnemyBot : MonoBehaviour
 {
     /// <summary>
-    /// A reference to the player
+    /// A reference to the player and the Spawn Manager
     /// </summary>
-    [SerializeField] private GameObject Player;
-
-    /// <summary>
-    /// the number of enemies in the entire game
-    /// </summary>
-    private static int numEnemies;
+    [SerializeField] private GameObject Player, SpawnManager;
 
     /// <summary>
     /// the list of waypoints along the path the enemy is to follow
@@ -62,7 +57,7 @@ public class EnemyBot : MonoBehaviour
     /// <summary>
     /// The indicator of the enemy bot on the minimap.
     /// </summary>
-    [SerializeField] private RawImage indicator;
+    [SerializeField] private RawImage indicator, indic;
 
     /// <summary>
     /// the change in position of the enemy bot while moving.
@@ -77,12 +72,12 @@ public class EnemyBot : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        numEnemies++;
+        SpawnManager = GameObject.Find("SpawnManager");
         UIManager = GameObject.Find("UIManager");
         Player = GameObject.FindGameObjectWithTag("Player");
         _animator = GetComponent<Animator>();
         maxHealth = health;
-        RawImage indic = Instantiate(indicator, transform.position, Quaternion.identity);
+        indic = Instantiate(indicator, transform.position - 800 * Vector3.left, Quaternion.identity);
         indic.transform.SetParent(GameObject.Find("MiniMap").transform, false);
         indic.gameObject.GetComponent<MinimapIcon>().symbolizedObject = this.gameObject;
     }
@@ -113,10 +108,8 @@ public class EnemyBot : MonoBehaviour
         } else if (waypointIndex == _waypoints.Length)
         {
             UIManager.GetComponent<UIManager>().loseLives(damage);
-            if(--numEnemies == 0)
-            {
-                UIManager.GetComponent<UIManager>().EnableStartButton();
-            }
+            DecrementEnemyCount();
+            Destroy(indic);
             Destroy(this.gameObject);
         }
 
@@ -148,13 +141,28 @@ public class EnemyBot : MonoBehaviour
         if(health <= 0)
         {
             Player.GetComponent<MainGuy>().Transaction(goldValue);
+            DecrementEnemyCount();
+            Destroy(indic);
             Destroy(this.gameObject);
-            //Debug.Log(indicator.name);
-            Destroy(GameObject.Find(indicator.name + "(Clone)"));
-            if(--numEnemies == 0)
-            {
+        }
+    }
+
+    /// <summary>
+    /// Decrements the number of enemies known by the spawn manager, 
+    /// and allows the player to start the next wave.
+    /// </summary>
+    public void DecrementEnemyCount()
+    {
+        if (SpawnManager.GetComponent<SpawnManager0>())
+        {
+            int foesRemaining = --SpawnManager.GetComponent<SpawnManager0>().numEnemies;
+            if (foesRemaining == 0)
                 UIManager.GetComponent<UIManager>().EnableStartButton();
-            }
+        } else if (SpawnManager.GetComponent<SpawnManager1>())
+        {
+            int foesRemaining = --SpawnManager.GetComponent<SpawnManager1>().numEnemies;
+            if (foesRemaining == 0)
+                UIManager.GetComponent<UIManager>().EnableStartButton();
         }
     }
 

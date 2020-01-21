@@ -68,10 +68,13 @@ public class UIManager : MonoBehaviour
         Player = GameObject.Find("MainGuy").GetComponent<MainGuy>();
         gBText.text = "" + Player.gBytes;
         InventoryButtons = new Button[16];
-        //foreach(GameObject button in TurretButtons)
-        //{
-        //    button.SetActive(false);
-        //}
+        //Unpause the game when it is loaded.
+        LosingScreen.SetActive(false);
+        BuildableSquares.SetActive(true);
+        InGameUI.SetActive(true);
+        Time.timeScale = 1;
+        gamePaused = false;
+
         _audioSource = GetComponent<AudioSource>();
         gamePaused = false;
     }
@@ -80,7 +83,8 @@ public class UIManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (InGameUI.activeInHierarchy && Input.GetKeyDown(KeyCode.Escape))
+        if (InGameUI.activeInHierarchy && 
+            (Input.GetKeyDown(KeyCode.Escape) || Input.GetKeyDown(KeyCode.P)))
         {
             if (gamePaused)
             {
@@ -146,6 +150,10 @@ public class UIManager : MonoBehaviour
         {
             CameraManager.GetComponent<CameraManager>().PlayTrack(3);
             LosingScreen.SetActive(true);
+            BuildableSquares.SetActive(false);
+            InGameUI.SetActive(false);
+            Time.timeScale = 0;
+            gamePaused = true;
         }
     }
 
